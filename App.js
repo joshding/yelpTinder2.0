@@ -1,7 +1,7 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Button, Alert, View, Dimensions, Image } from 'react-native';
+import { StyleSheet, Button, Alert, View, Text, Dimensions, Image } from 'react-native';
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import FirstView from './app/Views/FirstView.js';
 import SwiperView from './app/Views/SwiperView.js';
@@ -27,7 +27,7 @@ class App extends React.Component {
     axios.get('http://10.0.0.9:3000/yelp').then((response) => {
       console.log('here is data: ', typeof response.data)
       const businesses = response.data;
-      console.log(businesses[0].images)
+      console.log(businesses.length)
       this.setState({businesses});
     }).catch((err) => console.log('get request failed client side', err));
   }
@@ -42,7 +42,7 @@ class App extends React.Component {
 
     console.log('this is view: ', view)
     return (
-      views[view]
+      businesses.length? views[view]: <View><Text>no businesses</Text></View>
     );
   }
 }

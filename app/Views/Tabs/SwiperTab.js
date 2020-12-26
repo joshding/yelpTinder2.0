@@ -40,23 +40,20 @@ const styles = StyleSheet.create({
 });
 
 export default SwiperTab = ({businesses}) => {
+  var i = 0;
+  console.log(businesses);
   return (
    <View>
     <Swiper
         getNextCardData={({ first, left, right, previousCards }) => {
-          if (previousCards.length >= 10) {
-            // End of deck
-            return null;
+          const index =0
+          //previousCards.length
+          console.log(index)
+          return index;
+          if(left || right|| first) {
+          return <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={{uri:businesses[index].images[0]}}></ImageBackground>
           }
-          if (first) {
-            return 'This is the first card. This is card #1.';
-          } else if (left) {
-            return `You swiped to the left. This is card #${previousCards.length +
-              1}.`;
-          } else if (right) {
-            return `You swiped to the right. This is card #${previousCards.length +
-              1}.`;
-          }
+          return null;
         }}
       >
         {(card) =>
@@ -65,13 +62,12 @@ export default SwiperTab = ({businesses}) => {
               <Text style={styles.text}>This is the end of the deck, pal.</Text>
             </View>
           ) : (
-            <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={{uri:businesses[0].images[0]}}></ImageBackground>
+            <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={{uri:businesses[card].images[0]}}></ImageBackground>
 
           )
         }
       </Swiper>
          <View style={{
-         // backgroundColor: "black",
           flex: 1.5,
           flexDirection: 'row',
           justifyContent: 'space-around',
