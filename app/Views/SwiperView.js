@@ -1,9 +1,10 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Button, Alert, View, Dimensions, ImageBackground , Image, SafeAreaView, Text} from 'react-native';
+import { StyleSheet, Button, Alert, View, Dimensions, ImageBackground , Image, SafeAreaView, Text, Pressable} from 'react-native';
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import Swiper from 'react-native-dynamic-deck-swiper';
+import MyAppText from '../MyAppText.js'
 
 const styles = StyleSheet.create({
   tinyLogo: {
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
 });
 
 
-export default SecondView = (props) => {
+export default SwiperView = ({changeView}) => {
+  console.log('in swiper view')
   return (
   <View
       style ={{
@@ -51,16 +53,21 @@ export default SecondView = (props) => {
         flex:1
       }}
       >
-        <SafeAreaView style={{
-          //backgroundColor: "black",
-          flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-around"}}>
-            {/* <View style={{
-            backgroundColor: '#fc5c65',
-            width: 30, height: 30}}/> */}
-            <Image style={{width:30, height: 30}} source={require('./assets/icons/icons8-explosion-64.png')}/>
-            <Image style={{width:30, height: 30}} source={require('./assets/icons/icons8-star-48.png')}/>
-            <Image style={{width:30, height: 30}} source={require('./assets/icons/icons8-chat-bubble-100.png')}/>
-            <Image style={{width:30, height: 30}} source={require('./assets/icons/icons8-user-48.png')}/>
+
+        <SafeAreaView  style={{
+          flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly"}}>
+            <View   style={{backgroundColor:'pink',borderRadius:100}}>
+            <Image  style={{width:30, height: 30}} source={require('../assets/icons/icons8-explosion-64.png')}/>
+            </View>
+            <Pressable onPress={() => changeView(2)}>
+            <Image defaultSource={require('../assets/default/icon.png')} style={{width:30, height: 30}} source={require('../assets/icons/icons8-star-48.png')}/>
+            </Pressable>
+            <View>
+            <Image style={{width:30, height: 30}} source={require('../assets/icons/icons8-chat-bubble-100.png')}/>
+            </View>
+            <View>
+            <Image style={{width:30, height: 30}} source={require('../assets/icons/icons8-user-48.png')}/>
+            </View>
           </SafeAreaView>
         <View style={styles.container}>
       <Swiper
@@ -90,7 +97,7 @@ export default SecondView = (props) => {
             //   <Text style={styles.text}>{card}</Text>
             // </View>
 
-            <ImageBackground resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={require('./assets/Layout-Supplementary-Materials/chair.jpg')}></ImageBackground>
+            <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={require('../assets/Layout-Supplementary-Materials/chair.jpg')}></ImageBackground>
 
           )
         }
@@ -102,8 +109,8 @@ export default SecondView = (props) => {
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center'}}>
-            <Image style={{width:50, height: 50}} source={require('./assets/icons/icons8-xbox-x-96.png')}/>
-            <Image style={{width:50, height: 50}} source={require('./assets/icons/icons8-checked-96.png')}/>
+            <Image style={{width:50, height: 50}} source={require('../assets/icons/icons8-xbox-x-96.png')}/>
+            <Image style={{width:50, height: 50}} source={require('../assets/icons/icons8-checked-96.png')} />
             </View>
       </View>
   )
