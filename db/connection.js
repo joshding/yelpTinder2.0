@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/mvp', {useNewUrlParser: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -16,7 +16,7 @@ const businessSchema = new Schema({
     unique: true,
   },
   rating: Number,
-  price: Number,
+  price: String,
   name: String,
   yelpURL: String,
   images: Array,

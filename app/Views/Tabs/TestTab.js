@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 
 export default TestTab = (props) => {
   return (
-   <View >
+   <View style={{alignItems:'center'}}>
      <Text>hello, this is test</Text>
    </View>
   )

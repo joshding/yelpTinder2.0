@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
 });
 
 
-export default SwiperView = ({changeView}) => {
-  console.log('in swiper view')
+export default SwiperView = ({changeView, businesses}) => {
+  console.log(businesses[0].images[0])
   return (
   <View
       style ={{
@@ -93,9 +93,6 @@ export default SwiperView = ({changeView}) => {
               <Text style={styles.text}>This is the end of the deck, pal.</Text>
             </View>
           ) : (
-            // <View style={styles.card}>
-            //   <Text style={styles.text}>{card}</Text>
-            // </View>
 
             <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={require('../assets/Layout-Supplementary-Materials/chair.jpg')}></ImageBackground>
 

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SwiperTab = (props) => {
+export default SwiperTab = ({businesses}) => {
   return (
    <View>
     <Swiper
@@ -65,7 +65,7 @@ export default SwiperTab = (props) => {
               <Text style={styles.text}>This is the end of the deck, pal.</Text>
             </View>
           ) : (
-            <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={require('../../assets/Layout-Supplementary-Materials/chair.jpg')}></ImageBackground>
+            <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={{uri:businesses[0].images[0]}}></ImageBackground>
 
           )
         }

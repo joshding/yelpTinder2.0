@@ -54,7 +54,7 @@ export default class AppView extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      view:1,
+      view:0,
     };
     this.changeView=this.changeView.bind(this);
   }
@@ -62,8 +62,9 @@ export default class AppView extends React.Component {
     this.setState({view})
   }
   render() {
+    const {businesses} = this.props;
     const views = {
-      0:<SwiperTab />,
+      0:<SwiperTab businesses={businesses}/>,
       1: <TestTab />
     };
     const {view} = this.state;
