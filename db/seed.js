@@ -14,7 +14,8 @@ const client = yelp.client(KEY.YELP_API_KEY);
 //   images: Array,
 //   address: String,
 //   reviewCount: Number,
-//   isOpenNow:Boolean
+//   isOpenNow:Boolean,
+//   isFavorite:Boolean
 
 // });
 // seed the db with random data.
@@ -29,9 +30,11 @@ client.search({
   // )
   const listings = response.jsonBody.businesses.map((business, index) => {
   const {name, image_url, url, review_count, categories, rating, location, price}= business
-  const listing = generateListing(index+1, url, [image_url], `${location.address1}, ${location.city}, ${location.state}, ${location.zip_code}`, rating, price, review_count);
+
+  const listing = generateListing(index+1, url, [image_url], `${location.address1}, ${location.city}, ${location.state}, ${location.zip_code}`, rating, price, review_count, name);
   return listing;
-  })
+  });
+  console.log('here is listing: ', listings[0])
   db.Business.insertMany(listings).then(() => console.log('inserted many'));
 
   //try to insert many into mongodb
@@ -41,8 +44,8 @@ client.search({
 const generateRandomBoolean = () => {
   return Math.floor(Math.random() * 6) %2 === 0;
 }
-const generateListing = (businessId, yelpURL, images, address, rating, price, reviewCount) => {
-  const listing = {businessId, rating, price, yelpURL, images, address, reviewCount};
+const generateListing = (businessId, yelpURL, images, address, rating, price, reviewCount, name) => {
+  const listing = {businessId, rating, price, yelpURL, images, address, reviewCount,name};
   listing.isOpenNow = generateRandomBoolean();
   listing.isFavorite = false;
   return listing;

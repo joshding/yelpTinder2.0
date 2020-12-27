@@ -1,5 +1,7 @@
 import React from 'react';
-import {StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder} from 'react-native';
+import {StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder, Slider} from 'react-native';
+import SliderImage from './SliderImage/SliderImage.js';
+
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const Users = [
@@ -92,7 +94,6 @@ export default class Card extends React.Component {
       if(i < currentIndex) {
         return null;
       } else if (i === currentIndex) {
-        console.log('in map: ',item.images[0])
         return (<Animated.View
           {...this.PanResponder.panHandlers}
           key={i} style={[this.rotateAndTranslate,{height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding:10, position:'absolute'}]}>
@@ -102,8 +103,9 @@ export default class Card extends React.Component {
             <Animated.View style={{opacity: this.dislikeOpacity, transform:[{rotate: '30deg'}], position: 'absolute', top:50, right:40, zIndex: 1000}}>
               <Text style={{borderWidth: 1, borderColor: 'red', color:'red', fontSize:32, fontWeight: '800', padding: 10}}>NOPE</Text>
             </Animated.View>
-      <Image style={{flex:1, height:null,width:null, resizeMode: 'cover',
-    borderRadius: 20}} source={{uri: item.images[0]}}/>
+      {/* <Image style={{flex:1, height:null,width:null, resizeMode: 'cover',
+    borderRadius: 20}} source={{uri: item.images[0]}}/> */}
+    <SliderImage business={item} />
     </Animated.View>
       )
     } else {
@@ -111,8 +113,9 @@ export default class Card extends React.Component {
       <Animated.View
 
         key={i} style={[{opacity: this.nextCardOpacity, transform: [{scale:this.nextCardScale}], height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding:10, position:'absolute'}]}>
-    <Image style={{flex:1, height:null,width:null, resizeMode: 'cover',
-  borderRadius: 20}} source={{uri: item.images[0]}}/>
+          <SliderImage business={item} />
+    {/* <Image style={{flex:1, height:null,width:null, resizeMode: 'cover',
+  borderRadius: 20}} source={{uri: item.images[0]}}/> */}
   </Animated.View>
     )
     }

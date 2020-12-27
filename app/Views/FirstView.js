@@ -1,7 +1,7 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Button, Alert, View,  Image, ImageBackground, Text } from 'react-native';
+import { StyleSheet, Button, Alert, View,  Image, ImageBackground, Text, Pressable } from 'react-native';
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import MyAppText from '../MyAppText';
 
@@ -11,10 +11,15 @@ const styles = StyleSheet.create({
     width: 75,
     height: 75,
     top: 50
+  },
+  startButton: {
+    flex:1,
+    justifyContent:'center',
+    alignItems: 'center'
   }
 });
 
-export default FirstView = (props) => {
+export default FirstView = ({handlePress}) => {
   return (
   <View
       style ={{
@@ -31,14 +36,15 @@ export default FirstView = (props) => {
           flex: 10, flexDirection: "column", alignItems: "center"}} source={require('../assets/Layout-Supplementary-Materials/background.jpg')}>
             <Image
           style={styles.tinyLogo}
-          source={require('../assets/Layout-Supplementary-Materials/logo-red.png')}
+          source={require('../assets/icons/icons8-explosion-64.png')}
         />
-        <Text style={{top:50}}>Sell What You Don't Need</Text>
+        <Text style={{top:50}}>Discover Local Businesses near you</Text>
           </ImageBackground>
-        <View style={{
+        {/* <View style={{
           backgroundColor: "#fc5c65",
           flex: 1
-      }}/>
+      }}/> */}
+      <Pressable style={styles.startButton} onPress={handlePress}><Text>Let's get started!</Text></Pressable>
         <View style={{
           backgroundColor: "#4ECDC4",
           flex: 1}}/>

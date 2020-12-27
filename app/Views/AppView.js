@@ -7,6 +7,9 @@ import Swiper from 'react-native-dynamic-deck-swiper';
 import MyAppText from '../MyAppText.js';
 import SwiperTab from './Tabs/SwiperTab.js';
 import TestTab from './Tabs/TestTab.js'
+import FavoritesTab from './Tabs/FavoritesTab.js';
+import ProfileTab from './Tabs/ProfileTab.js';
+import MessagesTab from './Tabs/MessagesTab.js'
 
 const styles = StyleSheet.create({
   tinyLogo: {
@@ -65,7 +68,9 @@ export default class AppView extends React.Component {
     const {businesses} = this.props;
     const views = {
       0:<SwiperTab businesses={businesses}/>,
-      1: <TestTab />
+      1: <FavoritesTab businesses={businesses.slice(0,5)}/>,
+      2: <MessagesTab/>,
+      3: <ProfileTab/>
     };
     const {view} = this.state;
   return (
