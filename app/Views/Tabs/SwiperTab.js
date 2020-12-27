@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Button, Alert, View, Dimensions, ImageBackground , Image, SafeAreaView, Text, Pressable} from 'react-native';
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import Swiper from 'react-native-dynamic-deck-swiper';
+import Card from './Card/Card.js';
 
 const styles = StyleSheet.create({
   tinyLogo: {
@@ -40,33 +41,10 @@ const styles = StyleSheet.create({
 });
 
 export default SwiperTab = ({businesses}) => {
-  var i = 0;
-  console.log(businesses);
   return (
    <View>
-    <Swiper
-        getNextCardData={({ first, left, right, previousCards }) => {
-          const index =0
-          //previousCards.length
-          console.log(index)
-          return index;
-          if(left || right|| first) {
-          return <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={{uri:businesses[index].images[0]}}></ImageBackground>
-          }
-          return null;
-        }}
-      >
-        {(card) =>
-          card === null ? (
-            <View style={styles.card}>
-              <Text style={styles.text}>This is the end of the deck, pal.</Text>
-            </View>
-          ) : (
-            <ImageBackground  resizeMode="stretch" style={styles.picture} imageStyle={styles.card} source={{uri:businesses[card].images[0]}}></ImageBackground>
-
-          )
-        }
-      </Swiper>
+    
+        <Card businesses={businesses}/>
          <View style={{
           flex: 1.5,
           flexDirection: 'row',

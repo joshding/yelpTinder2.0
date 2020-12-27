@@ -3,10 +3,9 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Button, Alert, View, Text, Dimensions, Image } from 'react-native';
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
-import FirstView from './app/Views/FirstView.js';
-import SwiperView from './app/Views/SwiperView.js';
-import FavoritesView from './app/Views/FavoritesView.js';
+import FirstView from './app/Views/FirstView.js'
 import AppView from './app/Views/AppView.js';
+import Card from './app/Views/Tabs/Card/Card.js';
 import axios from 'axios';
 
 
@@ -15,7 +14,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view:3,
+      view:1,
       businesses:[],
     };
     this.changeView = this.changeView.bind(this);
@@ -35,9 +34,9 @@ class App extends React.Component {
     const {view, businesses} = this.state
     const views = {
       0: <FirstView changeView={this.changeView}/>,
-      1: <SwiperView changeView={this.changeView} businesses={businesses}/>,
-      2: <FavoritesView changeView={this.changeView}/>,
-      3: <AppView businesses={businesses}/>
+      1: <AppView businesses={businesses}/>,
+      2:<Card/>
+
     };
 
     console.log('this is view: ', view)
