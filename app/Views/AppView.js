@@ -9,7 +9,9 @@ import SwiperTab from './Tabs/SwiperTab.js';
 import TestTab from './Tabs/TestTab.js'
 import FavoritesTab from './Tabs/FavoritesTab.js';
 import ProfileTab from './Tabs/ProfileTab.js';
-import MessagesTab from './Tabs/MessagesTab.js'
+import MessagesTab from './Tabs/MessagesTab.js';
+import DescriptionView from './DescriptionView.js';
+import axios from 'axios';
 
 const styles = StyleSheet.create({
   tinyLogo: {
@@ -58,22 +60,48 @@ export default class AppView extends React.Component {
     super(props);
     this.state={
       view:0,
+      descriptionView:false,
+      currentIndex: 0,
     };
     this.changeView=this.changeView.bind(this);
+    this.updateDescriptionView = this.updateDescriptionView.bind(this);
+    this.toggleFavorites = this.toggleFavorites.bind(this);
+    this.incrementCurrentIndex=this.incrementCurrentIndex.bind(this);
   }
   changeView(view) {
     this.setState({view})
   }
+  // getFavorites() {
+  //   axios.get(`http://10.0.0.9:3000/favorites`).then(response => {
+  //     console.log('here are favorites: ', response.data)
+  //     const favorites = response.data;
+  //     this.setState({favorites});
+  //     //console.log('here are favorites: ', favorites);
+  //   });
+  // }
+  updateDescriptionView(business) {
+    this.setState({descriptionView: business});
+  }
+  toggleFavorites(id) {
+    axios.put(`http://10.0.0.9:3000/favorite/${id}`).then(() => {
+    })
+
+  }
+  incrementCurrentIndex(callback) {
+  this.setState({currentIndex: this.state.currentIndex + 1}, callback)
+  }
   render() {
-    const {businesses} = this.props;
+    const {businesses, toggleFavorites} = this.props;
+    const {view,descriptionView, currentIndex, favorites} = this.state;
     const views = {
-      0:<SwiperTab businesses={businesses}/>,
-      1: <FavoritesTab businesses={businesses.slice(0,5)}/>,
+      0:<SwiperTab businesses={businesses} updateDescriptionView={this.updateDescriptionView} currentIndex={currentIndex} incrementCurrentIndex={this.incrementCurrentIndex} toggleFavorites={this.toggleFavorites} />,
+      1: <FavoritesTab businesses={favorites}/>,
       2: <MessagesTab/>,
       3: <ProfileTab/>
     };
-    const {view} = this.state;
+
   return (
+    descriptionView ? <DescriptionView updateDescriptionView={this.updateDescriptionView} business={descriptionView}/> : (
   <View
       style ={{
         backgroundColor: "#fff",
@@ -84,7 +112,7 @@ export default class AppView extends React.Component {
         <SafeAreaView  style={{
           flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-evenly"}}>
             <Pressable onPress={() => this.changeView(0)} style={view ===0? styles.highlighter:{}}>
-            <Image  style={{width:30, height: 30}} source={require('../assets/icons/icons8-explosion-64.png')}/>
+            <Image  style={{width:30, height: 30}} source={require('../assets/icons/icons8-crown-80.png')}/>
             </Pressable>
             <Pressable onPress={() => this.changeView(1)} style={view ===1? styles.highlighter:{}}>
             <Image defaultSource={require('../assets/default/icon.png')} style={{width:30, height: 30}} source={require('../assets/icons/icons8-star-48.png')}/>
@@ -96,11 +124,11 @@ export default class AppView extends React.Component {
             <Image style={{width:30, height: 30}} source={require('../assets/icons/icons8-user-48.png')}/>
             </Pressable>
           </SafeAreaView>
-          <View style={{flex:12}} >
+          <View style={{flex:12, marginTop: -20}} >
           {views[view]}
           </View>
-
       </View>
+    )
   )
         }
 }

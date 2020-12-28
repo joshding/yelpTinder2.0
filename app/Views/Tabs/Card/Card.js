@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, Dimensions, Image, Animated, PanResponder, Slider} from 'react-native';
 import SliderImage from './SliderImage/SliderImage.js';
+import axios from 'axios';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -10,7 +11,7 @@ const Users = [
   {id:'3', uri: require('../../../assets/icons/icons8-user-48.png')},
   {id:'4', uri: require('../../../assets/icons/icons8-explosion-64.png')}
 ]
-
+//will possibly need to pass the currentIndex state up?
 export default class Card extends React.Component {
 
   constructor(props) {
@@ -26,31 +27,43 @@ export default class Card extends React.Component {
         if(gestureState.dx > 120) {
           Animated.spring(this.position,{
             toValue: {
-              x:SCREEN_WIDTH +100, y:gestureState.dy}}).start(() => {
-                this.setState({currentIndex: this.state.currentIndex + 1}, () => {
-                  this.position.setValue({x:0, y:0})
-                })
-              })
+              x:SCREEN_WIDTH +100,
+              y:gestureState.dy}})
+              .start(() => {
+                // this.setState({currentIndex: this.state.currentIndex + 1},
+                //   () => {
+                //   this.position.setValue({x:0, y:0})
+                // })
+                this.props.incrementCurrentIndex(() => {
+                  this.position.setValue({x:0, y:0});
+                });
+              });
+              console.log('here is current business: ', this.props.businesses[this.props.currentIndex].businessId);
+              const id = this.props.businesses[this.props.currentIndex].businessId;
+              this.props.toggleFavorites(id);
+
             } else if(gestureState.dx < -120) {
               Animated.spring(this.position,{
                 toValue: {
-                  x:-SCREEN_WIDTH -100, y:gestureState.dy}}).start(() => {
-                    this.setState({currentIndex: this.state.currentIndex + 1}, () => {
-                      this.position.setValue({x:0, y:0})
-                    })
-                  })
+                  x:-SCREEN_WIDTH -100,
+                   y:gestureState.dy
+                  }}).start(() => {
+                    // this.setState({currentIndex: this.state.currentIndex + 1}, () => {
+                    //   this.position.setValue({x:0, y:0})
+                    // })
+                    this.props.incrementCurrentIndex(() => {
+                      this.position.setValue({x:0, y:0});
+                    });
+                  });
             } else {
               Animated.spring(this.position, {
                 toValue:{x:0, y:0},
-                friction: 4
-              }).start()
+                friction: 4,
+              }).start();
             }
           }
         })
 
-    this.state= {
-      currentIndex: 0
-    }
     this.position= new Animated.ValueXY();
     this.rotate = this.position.x.interpolate({
       inputRange:[-SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2],
@@ -87,9 +100,8 @@ export default class Card extends React.Component {
   }
 
   renderUsers = () => {
-    const {currentIndex} = this.state;
-    const {businesses} = this.props;
-
+    //const {currentIndex} = this.state;
+    const {businesses, updateDescriptionView, currentIndex} = this.props;
     return businesses.map((item, i) => {
       if(i < currentIndex) {
         return null;
@@ -105,7 +117,7 @@ export default class Card extends React.Component {
             </Animated.View>
       {/* <Image style={{flex:1, height:null,width:null, resizeMode: 'cover',
     borderRadius: 20}} source={{uri: item.images[0]}}/> */}
-    <SliderImage business={item} />
+    <SliderImage business={item} updateDescriptionView={updateDescriptionView} />
     </Animated.View>
       )
     } else {

@@ -13,8 +13,26 @@ app.get('/yelp', (req, res) => {
     console.log(data[0])
     res.status(200).send(data)
   });
-})
-
+});
+app.put('/favorite/:id', (req, res) => {
+  controller.toggleFavorite(req.params.id, (err, data) => {
+    res.status(200).send(data);
+  })
+});
+app.put('/favorites',(req, res) => {
+  controller.resetFavorites((err,data) => {
+    if(err) {
+      res.sendStatus(404);
+    }
+    console.log('favorites reset');
+    res.sendStatus(200);
+  })
+});
+app.get('/favorites', (req,res) => {
+  controller.getFavorites((err, data) => {
+    res.status(200).send(data);
+  })
+});
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

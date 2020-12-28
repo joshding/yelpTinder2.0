@@ -1,7 +1,7 @@
 
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Button, Alert, View,  Image, ImageBackground, Text, Pressable } from 'react-native';
+import { StyleSheet, Button, Alert, View,  Image, ImageBackground, Text, Pressable, TouchableOpacity } from 'react-native';
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import MyAppText from '../MyAppText';
 
@@ -15,8 +15,19 @@ const styles = StyleSheet.create({
   startButton: {
     flex:1,
     justifyContent:'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+    backgroundColor: 'gold',
+     //position:'absolute',
+
+    // alignSelf: 'flex-end'
+
+  },
+  // startView: {
+  //   //flex: 1,
+  //   justifyContent:'center',
+  //   alignItems: 'center',
+  //   backgroundColor: 'rgba(52, 52, 52, .5)'
+  // }
 });
 
 export default FirstView = ({handlePress}) => {
@@ -33,21 +44,19 @@ export default FirstView = ({handlePress}) => {
       >
 
         <ImageBackground style={{
-          flex: 10, flexDirection: "column", alignItems: "center"}} source={require('../assets/Layout-Supplementary-Materials/background.jpg')}>
+          flex: 10, flexDirection: "column", alignItems: "center"}} source={require('../assets/pictures/0b04db23e40511b47092f16ebc376653.jpg')}>
             <Image
           style={styles.tinyLogo}
-          source={require('../assets/icons/icons8-explosion-64.png')}
+          source={require('../assets/icons/icons8-crown-80.png')}
         />
-        <Text style={{top:50}}>Discover Local Businesses near you</Text>
+        <Text style={{top:50, color: 'black', fontSize: 15, fontWeight: '800'}}>Discover Local Businesses near you</Text>
           </ImageBackground>
         {/* <View style={{
           backgroundColor: "#fc5c65",
           flex: 1
       }}/> */}
-      <Pressable style={styles.startButton} onPress={handlePress}><Text>Let's get started!</Text></Pressable>
-        <View style={{
-          backgroundColor: "#4ECDC4",
-          flex: 1}}/>
+
+      <TouchableOpacity style={styles.startButton} onPress={handlePress}><Button onPress={handlePress} title="Let's Get Started"></Button></TouchableOpacity>
       </View>
   )
 }

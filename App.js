@@ -24,19 +24,23 @@ class App extends React.Component {
       view:1
     })
   }
+
   componentDidMount() {
     axios.get('http://10.0.0.9:3000/yelp').then((response) => {
-      //console.log('here is data: ', typeof response.data)
       const businesses = response.data;
-      //console.log(businesses[0]);
       this.setState({businesses});
+      axios.put('http://10.0.0.9:3000/favorites').then((response) => {
+        console.log('client side favorites reset');
+      }).catch((err) => {
+        console.log('error in favorite reset: ', err);
+      })
     }).catch((err) => console.log('get request failed client side', err));
   }
   render() {
     const {view, businesses} = this.state
     const views = {
       0: <FirstView handlePress={this.handlePress}/>,
-      1: <AppView businesses={businesses}/>
+      1: <AppView businesses={businesses} toggleFavorites={this.toggleFavorites}/>
 
     };
 

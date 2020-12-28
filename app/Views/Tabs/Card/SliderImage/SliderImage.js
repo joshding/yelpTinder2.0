@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, Pressable } from 'react-native';
+import { View, Text,Image,  ImageBackground, StyleSheet, Pressable, Modal, TouchableHighlight } from 'react-native';
 
 const styles = StyleSheet.create({
   img: {
@@ -9,16 +10,13 @@ const styles = StyleSheet.create({
   container: {
     flex:1
   },
-  openNow: {
-    color:'white',
-    left: 20,
-    fontSize:20
-  },
+
   topHalf: {
-    flex: 30
+    flex: 20
   },
   bottomHalf: {
-    flex:10
+    flex:10,
+    padding: 10
   },
   text:{
     fontSize: 35,
@@ -30,34 +28,148 @@ const styles = StyleSheet.create({
     color:'white'
   },
   rating: {
-    flex:1,
+    flex:0,
     flexDirection:'row'
+  },
+  openNow: {
+    color:'red',
+    //left: 20,
+    fontSize:15
+  },
+  openNowSign: {
+    flex: 1,
+    flexDirection:'row',
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor:'white',
+    width: 100,
+    height: 40,
+    left: 20,
+    position:'absolute',
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'red',
+  },
+  stars: {
+    top:3
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    width: 500,
+    height: 500,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center"
   }
 
 })
-function SliderImage({business}) {
-  console.log(business);
+
+class SliderImage extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state={
+      modalVisible:false,
+    }
+    this.setModalVisible= this.setModalVisible.bind(this);
+  }
+  setModalVisible = (visible) => {
+    this.setState({ modalVisible: visible });
+  }
+render() {
+  const {business, updateDescriptionView} = this.props;
+  const PATH = '../../../../assets/yelpStarsLg/large_';
+const FORMAT = '.png'
+const STARS = {
+  1:require(`${PATH}1${FORMAT}`),
+  '1.5': require(`${PATH}1_half${FORMAT}`),
+  2: require(`${PATH}2${FORMAT}`),
+  '2.5': require(`${PATH}2_half${FORMAT}`),
+  3: require(`${PATH}3${FORMAT}`),
+  '3.5': require(`${PATH}3_half${FORMAT}`),
+  4: require(`${PATH}4${FORMAT}`),
+  '4.5': require(`${PATH}4_half${FORMAT}`),
+  5: require(`${PATH}5${FORMAT}`)
+}
+const { modalVisible } = this.state;
   return (
     business ?
     <ImageBackground style={styles.img} imageStyle = {styles.imgStyle} source={{uri: business.images[0]}}><View style={styles.container}></View>
     <View style={styles.topHalf} >
       {business.isOpenNow?
-        <Text style ={styles.openNow}>open now</Text>: <Text></Text>
+      <View style={styles.openNowSign}>
+        <Text style ={styles.openNow}>Open Now!</Text></View>: <Text></Text>
        }
 
     </View>
     <View style={styles.bottomHalf}>
+      <Pressable onPress={() => {
+            this.setModalVisible(true);
+          }}>
     <Text style = {styles.text}>{business.name}</Text>
-    <Text style={styles.secondaryText}>Price range: {business.price}</Text>
+
     <View style={styles.rating} >
-      <Text style={styles.secondaryText}>{business.rating} stars </Text>
-    <Text style={styles.secondaryText}>{business.reviewCount} reviews</Text>
+      {/* <Text style={styles.secondaryText}>{business.rating} stars </Text> */}
+      <Image style={styles.stars} source={STARS[business.rating]}></Image>
+    <Text style={styles.secondaryText}>  {business.reviewCount} reviews</Text>
     </View>
-    <Text></Text>
+    <Text style={styles.secondaryText}>Price range: {business.price}</Text>
+    </Pressable>
     </View>
+    <View style={styles.centeredView}>
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Hello World!</Text>
+
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                onPress={() => {
+                  this.setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Hide Modal</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
+
+
+      </View>
 
     </ImageBackground>: <Text>no image</Text>
   );
+      }
 }
 
 export default SliderImage;

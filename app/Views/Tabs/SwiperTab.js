@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#E8E8E8',
     justifyContent: 'center',
-    //backgroundColor: 'turquoise',
+    //backgroundColor: 'turquoise', marginTop negative?
     marginTop: 0,
     marginBottom: 50,
     marginLeft: 0,
@@ -40,17 +40,17 @@ const styles = StyleSheet.create({
   }
 });
 
-export default SwiperTab = ({businesses}) => {
+export default SwiperTab = ({businesses, updateDescriptionView, currentIndex, toggleFavorites, incrementCurrentIndex}) => {
   return (
    <View>
-    
-        <Card businesses={businesses}/>
+
+        <Card businesses={businesses} updateDescriptionView={updateDescriptionView} currentIndex={currentIndex} toggleFavorites={toggleFavorites} incrementCurrentIndex={incrementCurrentIndex}/>
          <View style={{
           flex: 1.5,
           flexDirection: 'row',
           justifyContent: 'space-around',
           alignItems: 'center',
-          marginTop: 560}}>
+          marginTop: 580}}>
             <Image style={{width:50, height: 50}} source={require('../../assets/icons/icons8-xbox-x-96.png')}/>
             <Image style={{width:50, height: 50}} source={require('../../assets/icons/icons8-checked-96.png')} />
           </View>
