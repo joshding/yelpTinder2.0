@@ -1,7 +1,8 @@
 
 import React from 'react';
-import { View, Text,Image,  ImageBackground, StyleSheet, Pressable, Modal, TouchableHighlight } from 'react-native';
-
+import { View, Text,Image,  ImageBackground, StyleSheet, Pressable, Modal, TouchableHighlight, Dimensions } from 'react-native';
+const WIDTH = Dimensions.get('window').width;
+const HEIGHT = Dimensions.get('window').height;
 const styles = StyleSheet.create({
   img: {
     flex:1, height:null,width:null, resizeMode: 'cover'
@@ -60,21 +61,22 @@ const styles = StyleSheet.create({
     marginTop: 22
   },
   modalView: {
-    margin: 20,
+    //margin: 20,
     backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
+    //borderRadius: 20,
+    //padding: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
       height: 2
     },
-    width: 500,
-    height: 500,
+    width: WIDTH,
+    height: HEIGHT,
+    marginTop: -30,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-    elevation: 5
+    elevation: 5,
   },
   textStyle: {
     color: "white",
@@ -84,7 +86,25 @@ const styles = StyleSheet.create({
   modalText: {
     marginBottom: 15,
     textAlign: "center"
-  }
+  },
+  modalImage: {
+    height: WIDTH,
+    width: WIDTH
+  },
+  backButton: {
+    height: 50,
+    width: 50,
+    //position:'absolute'
+    //marginTop: -40,
+    backgroundColor: 'transparent',
+  },openButton: {
+    //backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    marginTop: -HEIGHT/2-30,
+    marginRight: 280
+  },
 
 })
 
@@ -139,9 +159,11 @@ const { modalVisible } = this.state;
     <Text style={styles.secondaryText}>Price range: {business.price}</Text>
     </Pressable>
     </View>
+
+
     <View style={styles.centeredView}>
         <Modal
-          animationType="fade"
+          animationType="slide"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -150,15 +172,15 @@ const { modalVisible } = this.state;
         >
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
-              <Text style={styles.modalText}>Hello World!</Text>
-
+            <Image style={styles.modalImage}source={{uri: business.images[0]}}></Image>
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                style={{ ...styles.openButton }}
                 onPress={() => {
                   this.setModalVisible(!modalVisible);
                 }}
+                underlayColor="transparent"
               >
-                <Text style={styles.textStyle}>Hide Modal</Text>
+                <Image style={styles.backButton} source={require('../../../../assets/icons/icons8-back-arrow-64.png')}></Image>
               </TouchableHighlight>
             </View>
           </View>
