@@ -17,7 +17,9 @@ getBusinesses(5)
     businesses.map(business =>
       getReviews(business)
     )
-  ).catch(err => 'error getting business details').then(promises => Promise.all(promises)).then(responses => responses.map((response) => {
+  )
+  .catch(err => 'error getting business details')
+  .then(promises => Promise.all(promises)).then(responses => responses.map((response) => {
     return JSON.parse(response.body)})).then(response => response.map(res => res.reviews)).then(reviews => updateDBreviews(reviews));
 
 function updateDBreviews(reviews) {

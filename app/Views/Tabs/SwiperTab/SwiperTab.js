@@ -42,18 +42,32 @@ const styles = StyleSheet.create({
 
 export default SwiperTab = ({businesses, updateDescriptionView, currentIndex, toggleFavorites, incrementCurrentIndex}) => {
   return (
-   <View>
-
-        <Card businesses={businesses} updateDescriptionView={updateDescriptionView} currentIndex={currentIndex} toggleFavorites={toggleFavorites} incrementCurrentIndex={incrementCurrentIndex}/>
-         <View style={{
+    <View>
+      <Card
+        businesses={businesses}
+        updateDescriptionView={updateDescriptionView}
+        currentIndex={currentIndex}
+        toggleFavorites={toggleFavorites}
+        incrementCurrentIndex={incrementCurrentIndex}
+      />
+      <View
+        style={{
           flex: 1.5,
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          alignItems: 'center',
-          marginTop: 580}}>
-            <Image style={{width:50, height: 50}} source={require('../../../assets/icons/icons8-xbox-x-96.png')}/>
-            <Image style={{width:50, height: 50}} source={require('../../../assets/icons/icons8-checked-96.png')} />
-          </View>
+          flexDirection: "row",
+          justifyContent: "space-around",
+          alignItems: "center",
+          marginTop: 580,
+        }}
+      >
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={require("../../../assets/icons/icons8-xbox-x-96.png")}
+        />
+        <Image
+          style={{ width: 50, height: 50 }}
+          source={require("../../../assets/icons/icons8-checked-96.png")}
+        />
       </View>
-  )
+    </View>
+  );
 }

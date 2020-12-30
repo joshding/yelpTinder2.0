@@ -44,33 +44,45 @@ render() {
   const {business, updateDescriptionView} = this.props;
 
 const { modalVisible } = this.state;
-  return (
-    business ?
-    <ImageBackground style={styles.img} imageStyle = {styles.imgStyle} source={{uri: business.images[0]}}><View style={styles.container}></View>
-    <View style={styles.topHalf} >
-      {business.isOpenNow?
-      <View style={styles.openNowSign}>
-        <Text style ={styles.openNow}>Open Now!</Text></View>: <Text></Text>
-       }
-
-    </View>
-    <View style={styles.bottomHalf}>
-      <Pressable onPress={() => {
+  return business ? (
+    <ImageBackground
+      style={styles.img}
+      imageStyle={styles.imgStyle}
+      source={{ uri: business.images[0] }}
+    >
+      <View style={styles.container}></View>
+      <View style={styles.topHalf}>
+        {business.isOpenNow ? (
+          <View style={styles.openNowSign}>
+            <Text style={styles.openNow}>Open Now!</Text>
+          </View>
+        ) : (
+          <Text></Text>
+        )}
+      </View>
+      <View style={styles.bottomHalf}>
+        <Pressable
+          onPress={() => {
             this.setModalVisible(true);
-          }}>
-    <Text style = {styles.text}>{business.name}</Text>
+          }}
+        >
+          <Text style={styles.text}>{business.name}</Text>
 
-    <View style={styles.rating} >
-      {/* <Text style={styles.secondaryText}>{business.rating} stars </Text> */}
-      <Image style={styles.stars} source={STARS[business.rating]}></Image>
-    <Text style={styles.secondaryText}>  {business.reviewCount} reviews</Text>
-    </View>
-    <Text style={styles.secondaryText}>Price range: {business.price}</Text>
-    </Pressable>
-    </View>
+          <View style={styles.rating}>
+            {/* <Text style={styles.secondaryText}>{business.rating} stars </Text> */}
+            <Image style={styles.stars} source={STARS[business.rating]}></Image>
+            <Text style={styles.secondaryText}>
+              {" "}
+              {business.reviewCount} reviews
+            </Text>
+          </View>
+          <Text style={styles.secondaryText}>
+            Price range: {business.price}
+          </Text>
+        </Pressable>
+      </View>
 
-
-    <View style={styles.centeredView}>
+      <View style={styles.centeredView}>
         <Modal
           animationType="slide"
           transparent={true}
@@ -80,38 +92,48 @@ const { modalVisible } = this.state;
           }}
         >
           <View style={styles.centeredView}>
-          <ScrollView>
-            <View style={styles.modalView}>
-            <TouchableHighlight
-                style={{ ...styles.openButton }}
-                onPress={() => {
-                  this.setModalVisible(!modalVisible);
-                }}
-                underlayColor="transparent"
-              >
-                <Image style={styles.backButton} source={require('../../../../../assets/icons/icons8-back-arrow-64.png')}></Image>
-              </TouchableHighlight>
-            <Image style={styles.modalImage} source={{uri: business.images[0]}}></Image>
-            <View style={styles.modalDescriptionView}>
-            <View style={styles.modalTitleView}>
-            <Text style={styles.modalTitleText}>{business.name}</Text>
-            <Text style={styles.miles}>{business.distance}mi</Text>
-            </View>
-            <View style={styles.rating} >
-      <Image  source={XLSTARS[business.rating]}></Image>
-    <Text style={styles.modalReviewCount}>  {business.reviewCount} reviews</Text>
-    </View>
-    <Text style={styles.modalPriceRange}>Price Range: {business.price}</Text>
-    </View>
-            </View>
+            <ScrollView>
+              <View style={styles.modalView}>
+                <TouchableHighlight
+                  style={{ ...styles.openButton }}
+                  onPress={() => {
+                    this.setModalVisible(!modalVisible);
+                  }}
+                  underlayColor="transparent"
+                >
+                  <Image
+                    style={styles.backButton}
+                    source={require("../../../../../assets/icons/icons8-back-arrow-64.png")}
+                  ></Image>
+                </TouchableHighlight>
+                <Image
+                  style={styles.modalImage}
+                  source={{ uri: business.images[0] }}
+                ></Image>
+                <View style={styles.modalDescriptionView}>
+                  <View style={styles.modalTitleView}>
+                    <Text style={styles.modalTitleText}>{business.name}</Text>
+                    <Text style={styles.miles}>{business.distance}mi</Text>
+                  </View>
+                  <View style={styles.rating}>
+                    <Image source={XLSTARS[business.rating]}></Image>
+                    <Text style={styles.modalReviewCount}>
+                      {" "}
+                      {business.reviewCount} reviews
+                    </Text>
+                  </View>
+                  <Text style={styles.modalPriceRange}>
+                    Price Range: {business.price}
+                  </Text>
+                </View>
+              </View>
             </ScrollView>
           </View>
         </Modal>
-
-
       </View>
-
-    </ImageBackground>: <Text>no image</Text>
+    </ImageBackground>
+  ) : (
+    <Text>no image</Text>
   );
       }
 }
