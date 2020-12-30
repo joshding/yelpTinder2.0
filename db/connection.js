@@ -24,6 +24,12 @@ const businessSchema = new Schema({
   reviewCount: Number,
   isOpenNow:Boolean,
   isFavorite:Boolean,
+  reviews: Array,
+  categories: Array,
+  phoneNumber:String,
+  distance: String,
+  hours:Array,
+  isClaimed: Boolean
 
 });
 

@@ -5,7 +5,6 @@ import { StyleSheet, Button, Alert, View, Text, Dimensions, Image } from 'react-
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import FirstView from './app/Views/FirstView.js'
 import AppView from './app/Views/AppView.js';
-import Card from './app/Views/Tabs/Card/Card.js';
 import axios from 'axios';
 
 
