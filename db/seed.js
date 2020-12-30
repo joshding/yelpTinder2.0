@@ -24,10 +24,8 @@ client.search({
   location: 'san francisco, ca',
   limit:50
 }).then(response => {
-  //console.log(response.jsonBody.businesses[0]);
+  console.log(response.jsonBody.businesses[0]);
 
-  // generateListing(
-  // )
   const listings = response.jsonBody.businesses.map((business, index) => {
   const {name, image_url, url, review_count, categories, rating, location, price}= business
 
@@ -37,7 +35,6 @@ client.search({
   console.log('here is listing: ', listings[0])
   db.Business.insertMany(listings).then(() => console.log('inserted many'));
 
-  //try to insert many into mongodb
 }).catch(e => {
   console.log(e);
 });

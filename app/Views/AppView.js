@@ -5,7 +5,7 @@ import { StyleSheet, Button, Alert, View, Dimensions, ImageBackground , Image, S
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
 import Swiper from 'react-native-dynamic-deck-swiper';
 import MyAppText from '../MyAppText.js';
-import SwiperTab from './Tabs/SwiperTab.js';
+import SwiperTab from './Tabs/SwiperTab/SwiperTab.js';
 import TestTab from './Tabs/TestTab.js'
 import FavoritesTab from './Tabs/FavoritesTab.js';
 import ProfileTab from './Tabs/ProfileTab.js';
@@ -13,46 +13,7 @@ import MessagesTab from './Tabs/MessagesTab.js';
 import DescriptionView from './DescriptionView.js';
 import axios from 'axios';
 
-const styles = StyleSheet.create({
-  tinyLogo: {
-    width: 125,
-    height: 125,
-    top: 75
-  },
-  container: {
-    flex: 12,
-    backgroundColor: '#F5FCFF'
-  },
-  card: {
-    flex: 1,
-     //borderRadius: 8,
-    borderWidth: 2,
-    borderColor: '#E8E8E8',
-    justifyContent: 'center',
-    //backgroundColor: 'turquoise',
-    marginTop: 0,
-    marginBottom: 50,
-    marginLeft: 0,
-    marginRight: 0,
-    borderRadius: 30,
-    padding: 10,
-    height: 535
-  },
-  text: {
-    textAlign: 'center',
-    fontSize: 50,
-    backgroundColor: 'transparent'
-  },
-  picture: {
-    width:'100%',
-    height: '100%',
 
-  },
-  highlighter: {
-    backgroundColor:'pink',
-    borderRadius:100
-  }
-});
 
 
 export default class AppView extends React.Component {
@@ -71,14 +32,7 @@ export default class AppView extends React.Component {
   changeView(view) {
     this.setState({view})
   }
-  // getFavorites() {
-  //   axios.get(`http://10.0.0.9:3000/favorites`).then(response => {
-  //     console.log('here are favorites: ', response.data)
-  //     const favorites = response.data;
-  //     this.setState({favorites});
-  //     //console.log('here are favorites: ', favorites);
-  //   });
-  // }
+
   updateDescriptionView(business) {
     this.setState({descriptionView: business});
   }
@@ -132,3 +86,43 @@ export default class AppView extends React.Component {
   )
         }
 }
+const styles = StyleSheet.create({
+  tinyLogo: {
+    width: 125,
+    height: 125,
+    top: 75
+  },
+  container: {
+    flex: 12,
+    backgroundColor: '#F5FCFF'
+  },
+  card: {
+    flex: 1,
+     //borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#E8E8E8',
+    justifyContent: 'center',
+    //backgroundColor: 'turquoise',
+    marginTop: 0,
+    marginBottom: 50,
+    marginLeft: 0,
+    marginRight: 0,
+    borderRadius: 30,
+    padding: 10,
+    height: 535
+  },
+  text: {
+    textAlign: 'center',
+    fontSize: 50,
+    backgroundColor: 'transparent'
+  },
+  picture: {
+    width:'100%',
+    height: '100%',
+
+  },
+  highlighter: {
+    backgroundColor:'pink',
+    borderRadius:100
+  }
+});

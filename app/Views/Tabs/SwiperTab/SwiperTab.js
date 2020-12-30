@@ -51,8 +51,8 @@ export default SwiperTab = ({businesses, updateDescriptionView, currentIndex, to
           justifyContent: 'space-around',
           alignItems: 'center',
           marginTop: 580}}>
-            <Image style={{width:50, height: 50}} source={require('../../assets/icons/icons8-xbox-x-96.png')}/>
-            <Image style={{width:50, height: 50}} source={require('../../assets/icons/icons8-checked-96.png')} />
+            <Image style={{width:50, height: 50}} source={require('../../../assets/icons/icons8-xbox-x-96.png')}/>
+            <Image style={{width:50, height: 50}} source={require('../../../assets/icons/icons8-checked-96.png')} />
           </View>
       </View>
   )

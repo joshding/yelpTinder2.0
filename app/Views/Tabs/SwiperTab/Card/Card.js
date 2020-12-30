@@ -6,10 +6,10 @@ import axios from 'axios';
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const Users = [
-  {id:'1', uri: require('../../../assets/Layout-Supplementary-Materials/background.jpg')},
-  {id:'2', uri: require('../../../assets/Layout-Supplementary-Materials/chair.jpg')},
-  {id:'3', uri: require('../../../assets/icons/icons8-user-48.png')},
-  {id:'4', uri: require('../../../assets/icons/icons8-explosion-64.png')}
+  {id:'1', uri: require('../../../../assets/Layout-Supplementary-Materials/background.jpg')},
+  {id:'2', uri: require('../../../../assets/Layout-Supplementary-Materials/chair.jpg')},
+  {id:'3', uri: require('../../../../assets/icons/icons8-user-48.png')},
+  {id:'4', uri: require('../../../../assets/icons/icons8-explosion-64.png')}
 ]
 //will possibly need to pass the currentIndex state up?
 export default class Card extends React.Component {
