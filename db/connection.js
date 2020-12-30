@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-mongoose.connect('mongodb://localhost/mvp', {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/mvp', {useNewUrlParser: true,  useFindAndModify: true});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));

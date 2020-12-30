@@ -15,20 +15,65 @@ getBusinesses(5)
   .then((businesses) =>
 
     businesses.map(business =>
-      getBusinessDetails(business)
+      getReviews(business)
     )
   ).catch(err => 'error getting business details').then(promises => Promise.all(promises)).then(responses => responses.map((response) => {
-    return JSON.parse(response.body)})).then(response => response.map(res => res.reviews)).then(console.log);
+    return JSON.parse(response.body)})).then(response => response.map(res => res.reviews)).then(reviews => updateDBreviews(reviews));
 
-function saveToDB(businesses) {
-  businesses.forEach((business, index)=> {
-    db.Business.save()
-  })
+function updateDBreviews(reviews) {
+  let array = []
+  //console.log(reviews);
+  for(var i = 1; i <=50; i++) {
+    //console.log(reviews[(i-1)%5], i)
+    array.push(db.Business.findOneAndUpdate({businessId:i}, {reviews:reviews[(i-1)%5]}));
+  }
+  return Promise.all(array);
 }
 
-function getBusinessDetails(bus) {
+function getReviews(bus) {
    return client.reviews(bus.alias)
-    //  .then(response => {
+  }
+
+  getBusinesses(5)
+    .then((businesses) =>
+      businesses.map(business =>
+        getBusinessDetails(business)
+      )
+    )
+    .catch(err => 'error getting business details')
+    .then(promises => Promise.all(promises))
+    .then(responses => responses.map((response) => {
+      return JSON.parse(response.body)
+    }))
+    .then(details => updateDBdetails(details));
+
+  function updateDBdetails(details) {
+    console.log(details.length);
+    const options = details.map(detail =>
+       {
+      return {
+        //images: detail.photos,
+      categories: detail.categories,
+      hours: detail.hours}
+    }
+    )
+    let array = [];
+    for(var i = 1; i <=50; i++) {
+      array.push(db.Business.findOneAndUpdate({businessId:i}, options[(i-1)%5]));
+    }
+    return Promise.all(array);
+  }
+
+ function getBusinessDetails(bus) {
+   return client.business(bus.alias)
+ }
+
+
+
+
+
+
+   //  .then(response => {
     //    return JSON.parse(response.body);
   //     const {name, image_url, url, review_count, categories, rating, location, price}= bus
 
@@ -36,7 +81,6 @@ function getBusinessDetails(bus) {
 
   // return listing;
 
-}
 // get 50 ids from yelp,
 //for each id, get details,
 // then console.log details.
@@ -96,13 +140,3 @@ function getBusinessDetails(bus) {
 //   return listing;
 // }
 
-// function saveBookAsync(book) {
-//   return new Promise(function(resolve, reject) {
-//       new Book(book).save(function(err) {
-//           if (err)
-//               reject(err);
-//           else
-//               resolve();
-//       })
-//   });
-// }

@@ -91,11 +91,11 @@ const { modalVisible } = this.state;
               >
                 <Image style={styles.backButton} source={require('../../../../../assets/icons/icons8-back-arrow-64.png')}></Image>
               </TouchableHighlight>
-            <Image style={styles.modalImage}source={{uri: business.images[0]}}></Image>
+            <Image style={styles.modalImage} source={{uri: business.images[0]}}></Image>
             <View style={styles.modalDescriptionView}>
             <View style={styles.modalTitleView}>
             <Text style={styles.modalTitleText}>{business.name}</Text>
-            <Text style={styles.miles}>7.4mi</Text>
+            <Text style={styles.miles}>{business.distance}mi</Text>
             </View>
             <View style={styles.rating} >
       <Image  source={XLSTARS[business.rating]}></Image>
@@ -201,15 +201,16 @@ const styles = StyleSheet.create({
   },
   modalImage: {
     height: WIDTH,
-    width: WIDTH
+    width: WIDTH,
   },
   backButton: {
     height: 50,
     width: 50,
     //position:'absolute'
-    //marginTop: -40,
+    marginTop: -40,
     backgroundColor: 'transparent',
-  },openButton: {
+  },
+  openButton: {
     //backgroundColor: "#F194FF",
     borderRadius: 20,
     padding: 10,

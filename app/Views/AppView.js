@@ -7,9 +7,9 @@ import Swiper from 'react-native-dynamic-deck-swiper';
 import MyAppText from '../MyAppText.js';
 import SwiperTab from './Tabs/SwiperTab/SwiperTab.js';
 import TestTab from './Tabs/TestTab.js'
-import FavoritesTab from './Tabs/FavoritesTab.js';
-import ProfileTab from './Tabs/ProfileTab.js';
-import MessagesTab from './Tabs/MessagesTab.js';
+import FavoritesTab from './Tabs/FavoritesTab/FavoritesTab.js';
+import ProfileTab from './Tabs/ProfileTab/ProfileTab.js';
+import ContactTab from './Tabs/ContactTab/ContactTab.js';
 import DescriptionView from './DescriptionView.js';
 import axios from 'axios';
 
@@ -50,7 +50,7 @@ export default class AppView extends React.Component {
     const views = {
       0:<SwiperTab businesses={businesses} updateDescriptionView={this.updateDescriptionView} currentIndex={currentIndex} incrementCurrentIndex={this.incrementCurrentIndex} toggleFavorites={this.toggleFavorites} />,
       1: <FavoritesTab businesses={favorites}/>,
-      2: <MessagesTab/>,
+      2: <ContactTab/>,
       3: <ProfileTab/>
     };
 
