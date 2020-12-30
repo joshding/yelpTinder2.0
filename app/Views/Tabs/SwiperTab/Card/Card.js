@@ -115,8 +115,6 @@ export default class Card extends React.Component {
             <Animated.View style={{opacity: this.dislikeOpacity, transform:[{rotate: '30deg'}], position: 'absolute', top:50, right:40, zIndex: 1000}}>
               <Text style={{borderWidth: 1, borderColor: 'red', color:'red', fontSize:32, fontWeight: '800', padding: 10}}>NOPE</Text>
             </Animated.View>
-      {/* <Image style={{flex:1, height:null,width:null, resizeMode: 'cover',
-    borderRadius: 20}} source={{uri: item.images[0]}}/> */}
     <SliderImage business={item} updateDescriptionView={updateDescriptionView} />
     </Animated.View>
       )
@@ -126,8 +124,6 @@ export default class Card extends React.Component {
 
         key={i} style={[{opacity: this.nextCardOpacity, transform: [{scale:this.nextCardScale}], height: SCREEN_HEIGHT - 120, width: SCREEN_WIDTH, padding:10, position:'absolute'}]}>
           <SliderImage business={item} />
-    {/* <Image style={{flex:1, height:null,width:null, resizeMode: 'cover',
-  borderRadius: 20}} source={{uri: item.images[0]}}/> */}
   </Animated.View>
     )
     }

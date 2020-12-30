@@ -1,6 +1,9 @@
 
 import React from 'react';
 import { View, Text,Image,  ImageBackground, StyleSheet, Pressable, Modal, TouchableHighlight, Dimensions, ScrollView } from 'react-native';
+import HoursOfOperation from '../../../HoursOfOperation';
+import TestTab from '../../../TestTab';
+
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
 const PATH = '../../../../../assets/yelpStarsLg/large_';
@@ -44,6 +47,7 @@ render() {
   const {business, updateDescriptionView} = this.props;
 
 const { modalVisible } = this.state;
+console.log('from within sliderImage', business.hours)
   return business ? (
     <ImageBackground
       style={styles.img}
@@ -69,7 +73,6 @@ const { modalVisible } = this.state;
           <Text style={styles.text}>{business.name}</Text>
 
           <View style={styles.rating}>
-            {/* <Text style={styles.secondaryText}>{business.rating} stars </Text> */}
             <Image style={styles.stars} source={STARS[business.rating]}></Image>
             <Text style={styles.secondaryText}>
               {" "}
@@ -92,8 +95,9 @@ const { modalVisible } = this.state;
           }}
         >
           <View style={styles.centeredView}>
-            <ScrollView>
+
               <View style={styles.modalView}>
+              <ScrollView>
                 <TouchableHighlight
                   style={{ ...styles.openButton }}
                   onPress={() => {
@@ -125,9 +129,11 @@ const { modalVisible } = this.state;
                   <Text style={styles.modalPriceRange}>
                     Price Range: {business.price}
                   </Text>
+                   <HoursOfOperation hours={business.hours}/>
                 </View>
+                </ScrollView>
               </View>
-            </ScrollView>
+
           </View>
         </Modal>
       </View>
@@ -207,7 +213,7 @@ const styles = StyleSheet.create({
     },
     width: WIDTH,
     height: HEIGHT,
-    marginTop: 0,
+    marginTop: -20,
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,

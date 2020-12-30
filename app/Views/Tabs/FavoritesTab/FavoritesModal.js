@@ -10,13 +10,14 @@ import {
   TouchableHighlight,
   Dimensions,
 } from "react-native";
-import FavoritesReview from "./FavoritesReview/FavoritesReview.js";
+import FavoritesReview from "./FavoritesChildren/FavoritesReview.js";
+import HoursOfOperation from '../HoursOfOperation';
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 
 function FavoritesModal({ setModalVisible, modalVisible, business }) {
-  console.log(business);
+  //console.log(business);
   return (
     <View style={styles.centeredView}>
       <Modal
@@ -41,10 +42,11 @@ function FavoritesModal({ setModalVisible, modalVisible, business }) {
               <Text style={styles.modalTitle}>
                 {business ? business.name : ""}
               </Text>
-
+              {business && business.hours? <HoursOfOperation hours ={business.hours} />: <Text></Text>}
               <Text style={styles.modalTitle}>
                 {business ? business.name + "'s reviews" : ""}
               </Text>
+
               <View style={styles.reviewSection}>
                 {business && business.reviews ? (
                   business.reviews.map((review) => {
@@ -57,7 +59,11 @@ function FavoritesModal({ setModalVisible, modalVisible, business }) {
                 ) : (
                   <Text></Text>
                 )}
+
               </View>
+
+
+
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "red" }}
                 onPress={() => {
