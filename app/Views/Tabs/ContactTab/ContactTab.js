@@ -1,8 +1,9 @@
 //basically going to take props of the favorites and render them dynamically.
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import axios from "axios";
 import Business from "./ContactChildren/Business.js";
+import network from '../../network'
 
 
 export default class ContactTab extends React.Component {
@@ -13,7 +14,7 @@ export default class ContactTab extends React.Component {
     };
   }
   getFavorites() {
-    axios.get(`http://10.0.0.9:3000/favorites`).then((response) => {
+    axios.get(network.connection + `/favorites`).then((response) => {
       console.log("here are favorites: ", response.data);
       const favorites = response.data;
       this.setState({ favorites });
@@ -33,7 +34,9 @@ export default class ContactTab extends React.Component {
           <Text style={styles.titleText}>Contact</Text>
         </View>
         <View style={styles.list}>
+          <ScrollView>
           <Business favorites={favorites} />
+          </ScrollView>
         </View>
       </View>
     );

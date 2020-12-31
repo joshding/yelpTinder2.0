@@ -11,6 +11,9 @@ import {
   Dimensions,
 } from "react-native";
 
+
+
+
 const SMPATH = "../../../../assets/yelpStarsSm/small_";
 const FORMAT = ".png";
 const SMSTARS = {
@@ -25,10 +28,17 @@ const SMSTARS = {
   5: require(`${SMPATH}5${FORMAT}`),
 };
 
+
+
+
+
+
 function FavoritesReview({ review }) {
-  console.log("here is text: ", review.text);
+  //console.log("here is text: ", review.text);
   return (
+
     <View style={styles.container}>
+
       <View style={styles.header}>
         <Image
           style={styles.image}
@@ -45,7 +55,9 @@ function FavoritesReview({ review }) {
       <View style={styles.review}>
         <Text>{review.text}</Text>
       </View>
+
     </View>
+
   );
 }
 const styles = StyleSheet.create({

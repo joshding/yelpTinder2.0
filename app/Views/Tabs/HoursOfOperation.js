@@ -26,7 +26,7 @@ const days = {
   6: "Saturday",
 };
 const HoursOfOperation = ({ hours }) => {
-  console.log("here are hours: ", hours);
+  
   function convertToNormalTime(time) {
     let hour = time.slice(0, 2);
     let minutes = time.slice(2);

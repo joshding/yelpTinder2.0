@@ -6,6 +6,30 @@ import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks
 import MyAppText from '../MyAppText';
 
 const WIDTH = Dimensions.get('window').width;
+
+export default FirstView = ({handlePress}) => {
+  return (
+  <View
+      style ={styles.container}
+      >
+
+        <ImageBackground style={styles.backgroundImage} source={require('../assets/pictures/0b04db23e40511b47092f16ebc376653.jpg')}>
+            <Image
+          style={styles.tinyLogo}
+          source={require('../assets/icons/icons8-crown-80.png')}
+        />
+        <Text style={styles.text}>Discover Local Businesses near you</Text>
+          </ImageBackground>
+        {/* <View style={{
+          backgroundColor: "#fc5c65",
+          flex: 1
+      }}/> */}
+
+      <TouchableOpacity style={styles.startButton} onPress={handlePress}><Button onPress={handlePress} title="Let's Get Started"></Button></TouchableOpacity>
+      </View>
+  )
+}
+
 const styles = StyleSheet.create({
   tinyLogo: {
     width: 75,
@@ -54,26 +78,3 @@ const styles = StyleSheet.create({
       fontSize: 15,
       fontWeight: '800'}
 });
-
-export default FirstView = ({handlePress}) => {
-  return (
-  <View
-      style ={styles.container}
-      >
-
-        <ImageBackground style={styles.backgroundImage} source={require('../assets/pictures/0b04db23e40511b47092f16ebc376653.jpg')}>
-            <Image
-          style={styles.tinyLogo}
-          source={require('../assets/icons/icons8-crown-80.png')}
-        />
-        <Text style={styles.text}>Discover Local Businesses near you</Text>
-          </ImageBackground>
-        {/* <View style={{
-          backgroundColor: "#fc5c65",
-          flex: 1
-      }}/> */}
-
-      <TouchableOpacity style={styles.startButton} onPress={handlePress}><Button onPress={handlePress} title="Let's Get Started"></Button></TouchableOpacity>
-      </View>
-  )
-}

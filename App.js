@@ -6,6 +6,7 @@ import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks
 import FirstView from './app/Views/FirstView.js'
 import AppView from './app/Views/AppView.js';
 import axios from 'axios';
+import network from './app/Views/network'
 
 
 
@@ -25,10 +26,10 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('http://10.0.0.9:3000/yelp').then((response) => {
+    axios.get(network.connection+ '/yelp').then((response) => {
       const businesses = response.data;
       this.setState({businesses});
-      axios.put('http://10.0.0.9:3000/favorites').then((response) => {
+      axios.put(network.connection +'/favorites').then((response) => {
         console.log('client side favorites reset');
       }).catch((err) => {
         console.log('error in favorite reset: ', err);

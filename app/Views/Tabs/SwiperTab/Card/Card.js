@@ -102,6 +102,7 @@ export default class Card extends React.Component {
   renderUsers = () => {
     //const {currentIndex} = this.state;
     const {businesses, updateDescriptionView, currentIndex} = this.props;
+    //const cards = businesses.slice(currentIndex, currentIndex+2);
     return businesses.map((item, i) => {
       if(i < currentIndex) {
         return null;

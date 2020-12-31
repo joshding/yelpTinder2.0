@@ -2,6 +2,7 @@
 import React from 'react';
 import { View, Text,Image,  ImageBackground, StyleSheet, Pressable, Modal, TouchableHighlight, Dimensions, ScrollView } from 'react-native';
 import HoursOfOperation from '../../../HoursOfOperation';
+import ModalDescription from '../../../ModalDescription';
 import TestTab from '../../../TestTab';
 
 const WIDTH = Dimensions.get('window').width;
@@ -47,7 +48,7 @@ render() {
   const {business, updateDescriptionView} = this.props;
 
 const { modalVisible } = this.state;
-console.log('from within sliderImage', business.hours)
+//console.log('from within sliderImage', business.categories.map(category => category.title).join(', '))
   return business ? (
     <ImageBackground
       style={styles.img}
@@ -82,6 +83,7 @@ console.log('from within sliderImage', business.hours)
           <Text style={styles.secondaryText}>
             Price range: {business.price}
           </Text>
+           {business && business.categories? <Text style={styles.secondaryText}>Categories: {business.categories.map(category => category.title).join(', ')}</Text>: <Text></Text>}
         </Pressable>
       </View>
 
@@ -115,7 +117,7 @@ console.log('from within sliderImage', business.hours)
                   source={{ uri: business.images[0] }}
                 ></Image>
                 <View style={styles.modalDescriptionView}>
-                  <View style={styles.modalTitleView}>
+                  {/* <View style={styles.modalTitleView}>
                     <Text style={styles.modalTitleText}>{business.name}</Text>
                     <Text style={styles.miles}>{business.distance}mi</Text>
                   </View>
@@ -129,7 +131,18 @@ console.log('from within sliderImage', business.hours)
                   <Text style={styles.modalPriceRange}>
                     Price Range: {business.price}
                   </Text>
-                   <HoursOfOperation hours={business.hours}/>
+                  {business && business.categories? <Text style={styles.modalPriceRange}>Categories: {business.categories.map(category => category.title).join(', ')}</Text>: <Text></Text>} */}
+                  {business ? <ModalDescription business={business}/>: <Text></Text>}
+                  <Text>{'\n'}</Text>
+                   {business && business.hours ? <HoursOfOperation hours={business.hours}/>: <Text></Text>}
+                   {/* <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Back</Text>
+              </TouchableHighlight> */}
                 </View>
                 </ScrollView>
               </View>
@@ -165,7 +178,7 @@ const styles = StyleSheet.create({
     fontWeight: '800'
   },
   secondaryText: {
-    fontSize: 25,
+    fontSize: 20,
     color:'white'
   },
   rating: {

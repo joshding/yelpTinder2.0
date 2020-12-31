@@ -12,6 +12,7 @@ import ProfileTab from './Tabs/ProfileTab/ProfileTab.js';
 import ContactTab from './Tabs/ContactTab/ContactTab.js';
 import DescriptionView from './DescriptionView.js';
 import axios from 'axios';
+import network from './network'
 
 
 
@@ -37,7 +38,7 @@ export default class AppView extends React.Component {
     this.setState({descriptionView: business});
   }
   toggleFavorites(id) {
-    axios.put(`http://10.0.0.9:3000/favorite/${id}`).then(() => {
+    axios.put(network.connection + `/favorite/${id}`).then(() => {
     })
 
   }
@@ -49,7 +50,7 @@ export default class AppView extends React.Component {
     const {view,descriptionView, currentIndex, favorites} = this.state;
     const views = {
       0:<SwiperTab businesses={businesses} updateDescriptionView={this.updateDescriptionView} currentIndex={currentIndex} incrementCurrentIndex={this.incrementCurrentIndex} toggleFavorites={this.toggleFavorites} />,
-      1: <FavoritesTab businesses={favorites}/>,
+      1: <FavoritesTab businesses={favorites} toggleFavorites={this.toggleFavorites}/>,
       2: <ContactTab/>,
       3: <ProfileTab/>
     };

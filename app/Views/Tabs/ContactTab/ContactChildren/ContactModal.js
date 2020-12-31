@@ -6,7 +6,8 @@ import {
   Text,
   TouchableHighlight,
   View,
-  Image
+  Image,
+  ScrollView
 } from "react-native";
 
 function ContactModal({ setModalVisible, modalVisible, favorite }) {
@@ -21,7 +22,9 @@ function ContactModal({ setModalVisible, modalVisible, favorite }) {
         }}
       >
         <View style={styles.centeredView}>
+
           <View style={styles.modalView}>
+
             {favorite && favorite.images? <Image style={styles.image} source={{uri: favorite.images[0]}}></Image>: <Text></Text>}
             {favorite ? (
               <View>
@@ -31,7 +34,6 @@ function ContactModal({ setModalVisible, modalVisible, favorite }) {
             ) : (
               <Text></Text>
             )}
-            {/* <View style={styles.allButtons}> */}
               <View style={styles.contactButtons}>
                 <TouchableHighlight
                   style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -59,8 +61,8 @@ function ContactModal({ setModalVisible, modalVisible, favorite }) {
                 >
                   <Text style={styles.textStyle}>Back</Text>
                 </TouchableHighlight>
+
               </View>
-            {/* </View> */}
           </View>
         </View>
       </Modal>
@@ -98,8 +100,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
-    width: 250,
-    height: 300,
+    width: 300,
+    height: 350,
   },
   openButton: {
     backgroundColor: "#F194FF",

@@ -10,9 +10,13 @@ import {
   Modal,
   TouchableHighlight,
   Pressable,
+  Animated,
+  TouchableOpacity,
 } from "react-native";
 import axios from "axios";
 import FavoritesModal from "./FavoritesModal.js";
+import Swipeable from "react-native-gesture-handler/Swipeable";
+import network from '../../network'
 
 const SMPATH = "../../../assets/yelpStarsSm/small_";
 const FORMAT = ".png";
@@ -36,9 +40,10 @@ class FavoritesTab extends React.Component {
       currentModalBusiness: {},
     };
     this.setModalVisible = this.setModalVisible.bind(this);
+    this.deleteFavorite = this.deleteFavorite.bind(this);
   }
   getFavorites() {
-    axios.get(`http://10.0.0.9:3000/favorites`).then((response) => {
+    axios.get(network.connection + `/favorites`).then((response) => {
       console.log("here are favorites: ", response.data);
       const favorites = response.data;
       this.setState({ favorites });
@@ -46,16 +51,27 @@ class FavoritesTab extends React.Component {
     });
   }
 
-  setModalVisible = (visible, business) => {
+  setModalVisible(visible, business) {
     this.setState({ modalVisible: visible, currentModalBusiness: business });
-  };
+  }
+  deleteFavorite(business, index) {
+
+    axios
+      .put(network.connection +`/favorite/${business.businessId}`)
+      .then(() => {
+        this.setState({favorites:[]});
+        this.getFavorites();
+      });
+  }
   componentDidMount() {
     this.getFavorites();
   }
+
   render() {
     //const {businesses} = this.props;
     const { modalVisible, currentModalBusiness } = this.state;
     const businesses = this.state.favorites;
+    //const swipeableRef = useRef(null);
     return (
       <View style={styles.container}>
         <View style={styles.title}>
@@ -64,37 +80,50 @@ class FavoritesTab extends React.Component {
         <View style={styles.favoriteList}>
           <ScrollView style={styles.favoritesList}>
             {businesses.length ? (
-              businesses.map((business) => {
+              businesses.map((business, index) => {
                 return (
-                  <Pressable
-                    onPress={() => {
-                      this.setModalVisible(true, business);
-                    }}
-                  >
-                    <View style={styles.favoriteContainer}>
-                      <Image
-                        style={styles.image}
-                        source={{ uri: business.images[0] }}
-                      ></Image>
-                      <View style={styles.description}>
-                        <Text>{business.name}</Text>
-                        <Text>{business.address}</Text>
-                        <View style={styles.reviewCount}>
-                          <Image source={SMSTARS[business.rating]}></Image>
-                          <Text> {business.reviewCount} reviews</Text>
-                        </View>
-                      </View>
-                      <FavoritesModal
-                        business={currentModalBusiness}
-                        modalVisible={modalVisible}
-                        setModalVisible={this.setModalVisible}
+                  <Swipeable
+                  //ref={swipeableRef}
+                    renderRightActions={(progress, dragX) => (
+                      <RightActions
+                        progress={progress}
+                        dragX={dragX}
+                        deleteFavorite={this.deleteFavorite}
+                        business={business}
+                        index={index}
                       />
-                    </View>
-                  </Pressable>
+                    )}
+                  >
+                    <Pressable
+                      onPress={() => {
+                        this.setModalVisible(true, business);
+                      }}
+                    >
+                      <View style={styles.favoriteContainer}>
+                        <Image
+                          style={styles.image}
+                          source={{ uri: business.images[0] }}
+                        ></Image>
+                        <View style={styles.description}>
+                          <Text>{business.name}</Text>
+                          <Text>{business.address}</Text>
+                          <View style={styles.reviewCount}>
+                            <Image source={SMSTARS[business.rating]}></Image>
+                            <Text> {business.reviewCount} reviews</Text>
+                          </View>
+                        </View>
+                        <FavoritesModal
+                          business={currentModalBusiness}
+                          modalVisible={modalVisible}
+                          setModalVisible={this.setModalVisible}
+                        />
+                      </View>
+                    </Pressable>
+                  </Swipeable>
                 );
               })
             ) : (
-              <Text>no favorites yet</Text>
+              <Text></Text>
             )}
           </ScrollView>
         </View>
@@ -103,6 +132,23 @@ class FavoritesTab extends React.Component {
       </View>
     );
   }
+}
+
+function RightActions({ progress, dragX, deleteFavorite, business, index }) {
+  const scale = dragX.interpolate({
+    inputRange: [-100, 0],
+    outputRange: [1, 0],
+    extrapolate: "clamp",
+  });
+  return (
+    <TouchableOpacity onPress={() => deleteFavorite(business, index)}>
+      <View style={styles.rightAction}>
+        <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
+          Delete
+        </Animated.Text>
+      </View>
+    </TouchableOpacity>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -127,8 +173,9 @@ const styles = StyleSheet.create({
     marginTop: 300,
   },
   image: {
-    width: '20%',
-    height: '100%',
+    width: "20%",
+    height: "100%",
+    borderRadius: 8,
   },
   favoriteContainer: {
     flex: 1,
@@ -152,6 +199,18 @@ const styles = StyleSheet.create({
   },
   description: {
     padding: 10,
+  },
+  rightAction: {
+    backgroundColor: "#dd2c00",
+    justifyContent: "center",
+    borderRadius: 8,
+    minHeight: 70,
+    //flex: 1
+  },
+  actionText: {
+    color: "#fff",
+    fontWeight: "600",
+    padding: 20,
   },
 });
 

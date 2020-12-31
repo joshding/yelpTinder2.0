@@ -11,7 +11,8 @@ import {
   Dimensions,
 } from "react-native";
 import FavoritesReview from "./FavoritesChildren/FavoritesReview.js";
-import HoursOfOperation from '../HoursOfOperation';
+import HoursOfOperation from "../HoursOfOperation";
+import ModalDescription from '../ModalDescription'
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -39,10 +40,17 @@ function FavoritesModal({ setModalVisible, modalVisible, business }) {
               ) : (
                 <Text></Text>
               )}
-              <Text style={styles.modalTitle}>
+              {business ? <ModalDescription business={business}/>: <Text></Text>}
+              {/* <Text style={styles.modalTitle}>
                 {business ? business.name : ""}
-              </Text>
-              {business && business.hours? <HoursOfOperation hours ={business.hours} />: <Text></Text>}
+              </Text> */}
+              <Text>{'\n'}</Text>
+              {business && business.hours ? (
+                <HoursOfOperation hours={business.hours} />
+              ) : (
+                <Text></Text>
+              )}
+              <Text>{'\n'}</Text>
               <Text style={styles.modalTitle}>
                 {business ? business.name + "'s reviews" : ""}
               </Text>
@@ -59,10 +67,7 @@ function FavoritesModal({ setModalVisible, modalVisible, business }) {
                 ) : (
                   <Text></Text>
                 )}
-
               </View>
-
-
 
               <TouchableHighlight
                 style={{ ...styles.openButton, backgroundColor: "red" }}
