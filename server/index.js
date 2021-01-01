@@ -10,7 +10,7 @@ app.get('/yelp', (req, res) => {
     if(err) {
       res.sendStatus(404)
     }
-    console.log(data[0])
+    console.log(data.map(business => business.images[0]));
     res.status(200).send(data)
   });
 });

@@ -26,7 +26,7 @@ const days = {
   6: "Saturday",
 };
 const HoursOfOperation = ({ hours }) => {
-  
+
   function convertToNormalTime(time) {
     let hour = time.slice(0, 2);
     let minutes = time.slice(2);
@@ -58,9 +58,9 @@ const HoursOfOperation = ({ hours }) => {
       </View>
       <View><Text>{'\n'}</Text></View>
       {hours && hours[0].open ? (
-        hours[0].open.map((obj) => {
+        hours[0].open.map((obj, i) => {
           return (
-            <View style={styles.row}>
+            <View style={styles.row} key={i}>
               <View style={styles.firstCell}>
                 <Text>{days[obj.day]}</Text>
               </View>

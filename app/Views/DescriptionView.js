@@ -16,7 +16,7 @@ backIcon: {
 })
 
 function DescriptionView({business,updateDescriptionView}) {
-  console.log(business.images[0])
+  //console.log(business.images[0])
   return (
     <SafeAreaView>
       <Image style={styles.img} source={{uri: business.images[0]}}></Image>

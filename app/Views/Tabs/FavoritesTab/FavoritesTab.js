@@ -93,6 +93,7 @@ class FavoritesTab extends React.Component {
                         index={index}
                       />
                     )}
+                    key={index}
                   >
                     <Pressable
                       onPress={() => {

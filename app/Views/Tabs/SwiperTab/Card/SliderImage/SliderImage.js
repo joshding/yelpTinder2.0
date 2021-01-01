@@ -4,6 +4,8 @@ import { View, Text,Image,  ImageBackground, StyleSheet, Pressable, Modal, Touch
 import HoursOfOperation from '../../../HoursOfOperation';
 import ModalDescription from '../../../ModalDescription';
 import TestTab from '../../../TestTab';
+import FastImage from 'react-native-fast-image';
+import businessImages from '../../../../../assets/businessImages'
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -32,6 +34,12 @@ const XLSTARS = {
   '4.5': require(`${XLPATH}4_half${FORMAT}`),
   5: require(`${XLPATH}5${FORMAT}`)
 }
+
+const PATH_TO_ASSETS= '../../../../../assets';
+//const BUSINESS_IMAGES = new Array(50).fill(0).map((path, index) => require(`../../../../../assets/businessImages/image1.jpg`) );
+const BUSINESS_IMAGES = new Array(50).fill(0).map((path, index) => require(`../../../../../assets/businessImages/image1.jpg`) );
+//BUSINESS_IMAGES= require(BUSINESS_IMAGES[0])
+
 class SliderImage extends React.Component{
   constructor(props) {
     super(props);
@@ -49,11 +57,13 @@ render() {
 
 const { modalVisible } = this.state;
 //console.log('from within sliderImage', business.categories.map(category => category.title).join(', '))
+//console.log(business.images)
+
   return business ? (
     <ImageBackground
       style={styles.img}
       imageStyle={styles.imgStyle}
-      source={{ uri: business.images[0] }}
+      source={businessImages[business.businessId]}
     >
       <View style={styles.container}></View>
       <View style={styles.topHalf}>
