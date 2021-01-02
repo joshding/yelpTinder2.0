@@ -70,7 +70,7 @@ function FavoritesModal({ setModalVisible, modalVisible, business }) {
               </View>
 
               <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "red" }}
+                style={{ ...styles.openButton, backgroundColor: "#d32323" }}
                 onPress={() => {
                   setModalVisible(!modalVisible);
                 }}
@@ -122,6 +122,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
+    width: 250,
+    alignSelf: 'center'
   },
   textStyle: {
     color: "white",

@@ -5,6 +5,7 @@ import axios from "axios";
 import Business from "./ContactChildren/Business.js";
 import network from '../../network'
 import { SearchBar } from 'react-native-elements';
+import Swipeable from "react-native-gesture-handler/Swipeable";
 
 
 export default class ContactTab extends React.Component {
@@ -15,6 +16,7 @@ export default class ContactTab extends React.Component {
       search:'',
       allFavorites:[]
     };
+    this.deleteFavorite=this.deleteFavorite.bind(this)
   }
   getFavorites() {
     axios.get(network.connection + `/favorites`).then((response) => {
@@ -23,6 +25,16 @@ export default class ContactTab extends React.Component {
       this.setState({ allFavorites, favorites: allFavorites });
       //console.log('here are favorites: ', favorites);
     });
+  }
+  deleteFavorite(business, index) {
+    axios
+      .put(network.connection +`/favorite/${business.businessId}`)
+      .then(() => {
+        this.setState({favorites:[]})
+
+        this.getFavorites();
+
+      });
   }
   updateSearch = (search) => {
     const favorites = this.state.allFavorites.filter(business => business.name.toLowerCase().includes(search.toLowerCase()));
@@ -35,6 +47,7 @@ export default class ContactTab extends React.Component {
   render() {
     const { favorites, search } = this.state;
     return (
+
       <View style={{flex:1, alignItems: 'center'}}>
         <SearchBar
         onChangeText={this.updateSearch}
@@ -47,13 +60,10 @@ export default class ContactTab extends React.Component {
     placeholder={'Search a local business'}
       />
       <View style={styles.container}>
-
-        {/* <View style={styles.title}>
-          <Text style={styles.titleText}>Contact</Text>
-        </View> */}
         <View style={styles.list}>
-          <ScrollView>
-          <Business favorites={favorites} />
+          <ScrollView
+          showsVerticalScrollIndicator={false}>
+          <Business favorites={favorites} deleteFavorite={this.deleteFavorite}/>
           </ScrollView>
         </View>
       </View>
@@ -67,7 +77,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems:'center',
     justifyContent:'flex-start',
-    marginTop: 10
+    marginTop: 10,
+    maxHeight: 500
+
   },
   title: {
     flex: 1,
@@ -92,6 +104,7 @@ const styles = StyleSheet.create({
 
      backgroundColor: 'white',
      borderWidth: 1,
+     marginTop: 10
     // borderRadius: 8
 
 

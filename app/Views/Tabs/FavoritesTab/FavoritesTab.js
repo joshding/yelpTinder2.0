@@ -39,14 +39,18 @@ class FavoritesTab extends React.Component {
       modalVisible: false,
       currentModalBusiness: {},
     };
+
     this.setModalVisible = this.setModalVisible.bind(this);
     this.deleteFavorite = this.deleteFavorite.bind(this);
+    this.getFavorites= this.getFavorites.bind(this);
   }
   getFavorites() {
     axios.get(network.connection + `/favorites`).then((response) => {
-      console.log("here are favorites: ", response.data);
+      //console.log("here are favorites: ", response.data);
       const favorites = response.data;
+      //console.log('here is swipeableRef', this.swipeableRef)
       this.setState({ favorites });
+
       //console.log('here are favorites: ', favorites);
     });
   }
@@ -55,16 +59,22 @@ class FavoritesTab extends React.Component {
     this.setState({ modalVisible: visible, currentModalBusiness: business });
   }
   deleteFavorite(business, index) {
-
     axios
       .put(network.connection +`/favorite/${business.businessId}`)
       .then(() => {
-        this.setState({favorites:[]});
+        // const favorites= this.state.favorites;
+        // favorites.splice(index, 1)
+        this.setState({favorites:[]})
+
         this.getFavorites();
+
       });
   }
   componentDidMount() {
     this.getFavorites();
+  }
+  closeSwiper() {
+    this.refs.swipeableRef.close()
   }
 
   render() {
@@ -78,12 +88,13 @@ class FavoritesTab extends React.Component {
           <Text style={styles.titleText}>Favorites</Text>
         </View>
         <View style={styles.favoriteList}>
-          <ScrollView style={styles.favoritesList}>
+          <ScrollView style={styles.favoritesList}
+          showsVerticalScrollIndicator={false}>
             {businesses.length ? (
               businesses.map((business, index) => {
                 return (
                   <Swipeable
-                  //ref={swipeableRef}
+                  ref={'swipeableRef'}
                     renderRightActions={(progress, dragX) => (
                       <RightActions
                         progress={progress}
@@ -91,8 +102,10 @@ class FavoritesTab extends React.Component {
                         deleteFavorite={this.deleteFavorite}
                         business={business}
                         index={index}
+
                       />
                     )}
+                    //onSwipeableOpen={this.deleteFavorite}
                     key={index}
                   >
                     <Pressable
@@ -142,7 +155,7 @@ function RightActions({ progress, dragX, deleteFavorite, business, index }) {
     extrapolate: "clamp",
   });
   return (
-    <TouchableOpacity onPress={() => deleteFavorite(business, index)}>
+    <TouchableOpacity onPress={() => {  deleteFavorite(business, index)}}>
       <View style={styles.rightAction}>
         <Animated.Text style={[styles.actionText, { transform: [{ scale }] }]}>
           Delete
@@ -165,7 +178,7 @@ const styles = StyleSheet.create({
     // marginBottom: -100
   },
   titleText: {
-    fontSize: 40,
+    fontSize: 35
   },
   favoriteList: {
     flex: 10,
@@ -181,10 +194,12 @@ const styles = StyleSheet.create({
   favoriteContainer: {
     flex: 1,
     flexDirection: "row",
-    borderWidth: 1,
-    borderColor: "black",
+    borderBottomWidth: 1,
+    borderColor: "#D8D8D8",
+    marginBottom: 5,
+    //marginTop: 5,
     alignItems: "center",
-    borderRadius: 10,
+    //borderRadius: 10,
     maxHeight: 70,
     minHeight: 70,
   },

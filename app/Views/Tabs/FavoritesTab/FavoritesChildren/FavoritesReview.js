@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
   elite: {
     fontWeight: "800",
-    color: "red",
+    color: "#f15c00",
   },
   user: {
     paddingLeft: 10,
