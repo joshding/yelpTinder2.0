@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Button, Alert, View, Dimensions, ImageBackground , Image, SafeAreaView, Text, Pressable} from 'react-native';
 import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
-import Swiper from 'react-native-dynamic-deck-swiper';
 import Card from './Card/Card.js';
 
 const styles = StyleSheet.create({
