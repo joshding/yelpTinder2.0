@@ -31,7 +31,7 @@ function FavoritesModal({ setModalVisible, modalVisible, business }) {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <ScrollView>
+            <ScrollView showsVerticalScrollIndicator={false}>
               {business && business.images ? (
                 <Image
                   style={styles.image}
@@ -57,9 +57,9 @@ function FavoritesModal({ setModalVisible, modalVisible, business }) {
 
               <View style={styles.reviewSection}>
                 {business && business.reviews ? (
-                  business.reviews.map((review) => {
+                  business.reviews.map((review, index) => {
                     return review ? (
-                      <FavoritesReview review={review} />
+                      <FavoritesReview review={review} key={index}/>
                     ) : (
                       <Text></Text>
                     );

@@ -59,16 +59,19 @@ class FavoritesTab extends React.Component {
     this.setState({ modalVisible: visible, currentModalBusiness: business });
   }
   deleteFavorite(business, index) {
+    const ref = 'swipeableRef' + index;
+    this.refs[ref].close();
     axios
       .put(network.connection +`/favorite/${business.businessId}`)
       .then(() => {
         // const favorites= this.state.favorites;
         // favorites.splice(index, 1)
-        this.setState({favorites:[]})
+        //this.setState({favorites:[]})
 
         this.getFavorites();
 
       });
+
   }
   componentDidMount() {
     this.getFavorites();
@@ -94,7 +97,7 @@ class FavoritesTab extends React.Component {
               businesses.map((business, index) => {
                 return (
                   <Swipeable
-                  ref={'swipeableRef'}
+                  ref={`swipeableRef${index}`}
                     renderRightActions={(progress, dragX) => (
                       <RightActions
                         progress={progress}
@@ -102,6 +105,7 @@ class FavoritesTab extends React.Component {
                         deleteFavorite={this.deleteFavorite}
                         business={business}
                         index={index}
+                        key={index}
 
                       />
                     )}

@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import { Text, View, StyleSheet, Image, Pressable,TouchableOpacity,Animated} from "react-native";
+import { Text, View, StyleSheet, Image, Pressable,TouchableOpacity,Animated, Alert} from "react-native";
 import ContactModal from './ContactModal';
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
@@ -30,8 +30,8 @@ class Business extends React.Component {
   setModalVisible = (visible, currentBusiness) => {
     this.setState({ modalVisible: visible , currentBusiness});
   }
-  onSwipeLeft=(name, index)=> {
-     alert(`Calling ${name}...`)
+  onSwipeLeft=(name, phoneNumber, index)=> {
+     Alert.alert(name, `Calling ${phoneNumber}...`)
     const ref = 'swipeableRef' + index;
     this.refs[ref].close();
   }
@@ -53,7 +53,7 @@ class Business extends React.Component {
                       />
                     )}
                     renderLeftActions ={LeftActions}
-                    onSwipeableLeftOpen ={() => this.onSwipeLeft(favorite.name, index)}
+                    onSwipeableLeftOpen ={() => this.onSwipeLeft(favorite.name, favorite.phoneNumber, index)}
                     key={index}
                   >
         <Pressable onPress={() => {

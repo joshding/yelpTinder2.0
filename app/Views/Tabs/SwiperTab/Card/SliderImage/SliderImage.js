@@ -36,9 +36,7 @@ const XLSTARS = {
 }
 
 const PATH_TO_ASSETS= '../../../../../assets';
-//const BUSINESS_IMAGES = new Array(50).fill(0).map((path, index) => require(`../../../../../assets/businessImages/image1.jpg`) );
-const BUSINESS_IMAGES = new Array(50).fill(0).map((path, index) => require(`../../../../../assets/businessImages/image1.jpg`) );
-//BUSINESS_IMAGES= require(BUSINESS_IMAGES[0])
+
 
 class SliderImage extends React.Component{
   constructor(props) {
@@ -109,7 +107,7 @@ const { modalVisible } = this.state;
           <View style={styles.centeredView}>
 
               <View style={styles.modalView}>
-              <ScrollView>
+              <ScrollView showsVerticalScrollIndicator={false}>
                 <TouchableHighlight
                   style={{ ...styles.openButton }}
                   onPress={() => {
@@ -127,21 +125,6 @@ const { modalVisible } = this.state;
                   source={{ uri: business.images[0] }}
                 ></Image>
                 <View style={styles.modalDescriptionView}>
-                  {/* <View style={styles.modalTitleView}>
-                    <Text style={styles.modalTitleText}>{business.name}</Text>
-                    <Text style={styles.miles}>{business.distance}mi</Text>
-                  </View>
-                  <View style={styles.rating}>
-                    <Image source={XLSTARS[business.rating]}></Image>
-                    <Text style={styles.modalReviewCount}>
-                      {" "}
-                      {business.reviewCount} reviews
-                    </Text>
-                  </View>
-                  <Text style={styles.modalPriceRange}>
-                    Price Range: {business.price}
-                  </Text>
-                  {business && business.categories? <Text style={styles.modalPriceRange}>Categories: {business.categories.map(category => category.title).join(', ')}</Text>: <Text></Text>} */}
                   {business ? <ModalDescription business={business}/>: <Text></Text>}
                   <Text>{'\n'}</Text>
                    {business && business.hours ? <HoursOfOperation hours={business.hours}/>: <Text></Text>}
@@ -170,7 +153,9 @@ const styles = StyleSheet.create({
   img: {
     flex:1, height:null,width:null, resizeMode: 'cover'
   },
-  imgStyle: {borderRadius:20},
+  imgStyle: {
+    borderRadius:20,
+  },
   container: {
     flex:1
   },

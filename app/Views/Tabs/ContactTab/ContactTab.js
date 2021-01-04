@@ -27,6 +27,8 @@ export default class ContactTab extends React.Component {
     });
   }
   deleteFavorite(business, index) {
+    // const ref = 'swipeableRef' + index;
+    // this.refs[ref].close();
     axios
       .put(network.connection +`/favorite/${business.businessId}`)
       .then(() => {
@@ -56,7 +58,7 @@ export default class ContactTab extends React.Component {
         containerStyle={styles.searchContainer}
         inputContainerStyle={styles.inputContainer}
         //inputStyle={{backgroundColor: 'white'}}
-        placeholderTextColor={'#g5g5g5'}
+        placeholderTextColor={'#D8D8D8'}
     placeholder={'Search a local business'}
       />
       <View style={styles.container}>

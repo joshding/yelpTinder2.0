@@ -44,16 +44,12 @@ export default class Card extends React.Component {
               x: SCREEN_WIDTH + 100,
               y: gestureState.dy,
             },
+            useNativeDriver:false
           }).start(() => {
-            // this.setState({currentIndex: this.state.currentIndex + 1},
-            //   () => {
-            //   this.position.setValue({x:0, y:0})
-            // })
             this.props.incrementCurrentIndex(() => {
               this.position.setValue({ x: 0, y: 0 });
             });
           });
-          //console.log('here is current business: ', this.props.businesses[this.props.currentIndex].businessId);
           const id = this.props.businesses[this.props.currentIndex].businessId;
           this.props.toggleFavorites(id);
         } else if (gestureState.dx < -120) {
@@ -62,10 +58,9 @@ export default class Card extends React.Component {
               x: -SCREEN_WIDTH - 100,
               y: gestureState.dy,
             },
+            useNativeDriver: false
           }).start(() => {
-            // this.setState({currentIndex: this.state.currentIndex + 1}, () => {
-            //   this.position.setValue({x:0, y:0})
-            // })
+
             this.props.incrementCurrentIndex(() => {
               this.position.setValue({ x: 0, y: 0 });
             });
@@ -73,6 +68,7 @@ export default class Card extends React.Component {
         } else {
           Animated.spring(this.position, {
             toValue: { x: 0, y: 0 },
+            useNativeDriver: false,
             friction: 4,
           }).start();
         }
@@ -129,6 +125,7 @@ export default class Card extends React.Component {
           return (
             <Animated.View
               {...this.PanResponder.panHandlers}
+              //ref='current'
               key={i}
               style={[
                 this.rotateAndTranslate,
@@ -189,7 +186,7 @@ export default class Card extends React.Component {
               <SliderImage
                 business={item}
                 updateDescriptionView={updateDescriptionView}
-              /> 
+              />
             </Animated.View>
           );
         } else if (i=== currentIndex+1) {
