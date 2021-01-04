@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "DoneWithIt",
-    "slug": "DoneWithIt",
+    "name": "YelpTinder",
+    "slug": "yelptinder",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./app/assets/default/icon.png",
