@@ -1,3 +1,3 @@
 module.exports={
-  connection: 'http://localhost:3000'
+  connection: 'http://18.144.61.58:3000'
 }

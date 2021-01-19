@@ -1,0 +1,3 @@
+goal: resize one image with javascript canvas.
+
+I guess will have to resize the image on client side? It looks 
