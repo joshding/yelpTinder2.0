@@ -21,7 +21,7 @@ An application used to connect users with local businesses, built with React Nat
 
 ## Installation and Setup Instructions
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine. You will also need Xcode iOS or Android Simulator.
+Clone down this repository. You will need `node` and `npm` installed globally on your machine. Xcode iOS or Android Simulator will also be needed to run the app.
 
 Installation:
 
@@ -31,9 +31,9 @@ To Seed MongoDB Database:
 
 `npm run seed`
 
-To Start Server:
+To Start App:
+`npm start`
 
-`npm run start`
 
 To Visit App:
 

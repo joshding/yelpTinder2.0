@@ -1,25 +1,29 @@
+/* RESIZE OPTIMIZE IMAGES */
+const Jimp = require('jimp');
 
-    var img = new Image();
-    // var ctx = canvas.getContext("2d");
-    // var canvasCopy = document.createElement("canvas");
-    // var copyContext = canvasCopy.getContext("2d");
-
-    img.onload = function()
-    {
-        var ratio = 1;
-
-        if(img.width > maxWidth)
-            ratio = maxWidth / img.width;
-        else if(img.height > maxHeight)
-            ratio = maxHeight / img.height;
-
-        canvasCopy.width = img.width;
-        canvasCopy.height = img.height;
-        copyContext.drawImage(img, 0, 0);
-
-        canvas.width = img.width * ratio;
-        canvas.height = img.height * ratio;
-        ctx.drawImage(canvasCopy, 0, 0, canvasCopy.width, canvasCopy.height, 0, 0, canvas.width, canvas.height);
-    };
-
-    img.src = './businessImages/image1.jpg';
+/**
+ * Resize + optimize images.
+ *
+ * @param Array images An array of images paths.
+ * @param Number width A number value of width e.g. 1920.
+ * @param Number height Optional number value of height e.g. 1080.
+ * @param Number quality Optional number value of quality of the image e.g. 90.
+ */
+async function resizeImages(images, width, height = Jimp.AUTO, quality){
+	await Promise.all(
+		images.map(async imgPath => {
+			const image = await Jimp.read(imgPath);
+			await image.resize(width, height);
+			await image.quality(quality);
+			await image.writeAsync(imgPath);
+		})
+	);
+};
+let images = [];
+for(let i =3; i <= 50; i++) {
+    images.push(`download/businessImages/image${i}.jpg`);
+}
+let width = 350;
+let quality = 100
+resizeImages(images, width, undefined, quality);
+module.exports = resizeImages;

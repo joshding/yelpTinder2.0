@@ -16,7 +16,6 @@ backIcon: {
 })
 
 function DescriptionView({business,updateDescriptionView}) {
-  //console.log(business.images[0])
   return (
     <SafeAreaView>
       <Image style={styles.img} source={{uri: business.images[0]}}></Image>
@@ -26,9 +25,6 @@ function DescriptionView({business,updateDescriptionView}) {
       </Pressable>
     <Text>{business.name}</Text>
     </View>
-    {/* <Pressable onPress={}>
-
-    </Pressable> */}
     </SafeAreaView>
   );
 }

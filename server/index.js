@@ -10,9 +10,23 @@ app.get('/yelp', (req, res) => {
     if(err) {
       res.sendStatus(404)
     }
-    console.log(data.map(business => business.images[0]));
+
     res.status(200).send(data)
   });
+});
+app.get('/imageurls', (req, res) => {
+  controller.findAll((err, data) => {
+    if(err) {
+      res.sendStatus(404)
+    }
+    const imageURLs = data.map(business => business.images[0]);
+    res.status(200).send(imageURLs);
+  });
+});
+app.get('/favorites', (req,res) => {
+  controller.getFavorites((err, data) => {
+    res.status(200).send(data);
+  })
 });
 app.put('/favorite/:id', (req, res) => {
   controller.toggleFavorite(req.params.id, (err, data) => {
@@ -28,11 +42,7 @@ app.put('/favorites',(req, res) => {
     res.sendStatus(200);
   })
 });
-app.get('/favorites', (req,res) => {
-  controller.getFavorites((err, data) => {
-    res.status(200).send(data);
-  })
-});
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })

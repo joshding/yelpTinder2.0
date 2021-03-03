@@ -20,10 +20,6 @@ export default FirstView = ({handlePress}) => {
         />
         <Text style={styles.text}>Discover Local Businesses near you</Text>
           </ImageBackground>
-        {/* <View style={{
-          backgroundColor: "#fc5c65",
-          flex: 1
-      }}/> */}
 
       <TouchableOpacity style={styles.startButton} onPress={handlePress}><Button onPress={handlePress} title="Let's Get Started"></Button></TouchableOpacity>
       </View>
