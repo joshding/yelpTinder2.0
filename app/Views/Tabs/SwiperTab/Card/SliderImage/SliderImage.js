@@ -128,14 +128,6 @@ const { modalVisible } = this.state;
                   {business ? <ModalDescription business={business}/>: <Text></Text>}
                   <Text>{'\n'}</Text>
                    {business && business.hours ? <HoursOfOperation hours={business.hours}/>: <Text></Text>}
-                   {/* <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                onPress={() => {
-                  setModalVisible(!modalVisible);
-                }}
-              >
-                <Text style={styles.textStyle}>Back</Text>
-              </TouchableHighlight> */}
                 </View>
                 </ScrollView>
               </View>

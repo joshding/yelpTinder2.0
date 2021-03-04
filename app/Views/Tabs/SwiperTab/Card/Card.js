@@ -113,15 +113,12 @@ export default class Card extends React.Component {
   }
 
   renderUsers = () => {
-    //const {currentIndex} = this.state;
     const { businesses, updateDescriptionView, currentIndex } = this.props;
-    //const cards = businesses.slice(currentIndex, currentIndex+2);
     return businesses
       .map((item, i) => {
         if (i < currentIndex) {
           return null;
         } else if (i === currentIndex) {
-        //} else {
           return (
             <Animated.View
               {...this.PanResponder.panHandlers}

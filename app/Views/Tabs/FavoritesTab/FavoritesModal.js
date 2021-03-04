@@ -41,9 +41,6 @@ function FavoritesModal({ setModalVisible, modalVisible, business }) {
                 <Text></Text>
               )}
               {business ? <ModalDescription business={business}/>: <Text></Text>}
-              {/* <Text style={styles.modalTitle}>
-                {business ? business.name : ""}
-              </Text> */}
               <Text>{'\n'}</Text>
               {business && business.hours ? (
                 <HoursOfOperation hours={business.hours} />

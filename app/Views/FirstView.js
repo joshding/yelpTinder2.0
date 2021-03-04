@@ -1,76 +1,81 @@
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import {
+  StyleSheet,
+  Button,
+  Alert,
+  View,
+  Image,
+  ImageBackground,
+  Text,
+  Pressable,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
+import {
+  useDimensions,
+  useDeviceOrientation,
+} from "@react-native-community/hooks";
+import MyAppText from "../MyAppText";
 
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Button, Alert, View,  Image, ImageBackground, Text, Pressable, TouchableOpacity, Dimensions } from 'react-native';
-import {useDimensions, useDeviceOrientation} from '@react-native-community/hooks';
-import MyAppText from '../MyAppText';
+const WIDTH = Dimensions.get("window").width;
 
-const WIDTH = Dimensions.get('window').width;
-
-export default FirstView = ({handlePress}) => {
+export default FirstView = ({ handlePress }) => {
   return (
-  <View
-      style ={styles.container}
+    <View style={styles.container}>
+      <ImageBackground
+        style={styles.backgroundImage}
+        source={require("../assets/pictures/0b04db23e40511b47092f16ebc376653.jpg")}
       >
-
-        <ImageBackground style={styles.backgroundImage} source={require('../assets/pictures/0b04db23e40511b47092f16ebc376653.jpg')}>
-            <Image
+        <Image
           style={styles.tinyLogo}
-          source={require('../assets/icons/icons8-crown-80.png')}
+          source={require("../assets/icons/icons8-crown-80.png")}
         />
         <Text style={styles.text}>Discover Local Businesses near you</Text>
-          </ImageBackground>
+      </ImageBackground>
 
-      <TouchableOpacity style={styles.startButton} onPress={handlePress}><Button onPress={handlePress} title="Let's Get Started"></Button></TouchableOpacity>
-      </View>
-  )
-}
+      <TouchableOpacity style={styles.startButton} onPress={handlePress}>
+        <Button onPress={handlePress} title="Let's Get Started"></Button>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   tinyLogo: {
     width: 75,
     height: 75,
-    top: 50
+    top: 50,
   },
   startButton: {
-    flex:1,
-    justifyContent:'center',
-    alignItems: 'center',
-    backgroundColor: 'gold',
-    position:'absolute',
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "gold",
+    position: "absolute",
     top: 575,
     width: 275,
     height: 55,
     borderRadius: 8,
     borderWidth: 1,
-    borderColor: 'black',
-
-    // alignSelf: 'flex-end'
-
+    borderColor: "black",
   },
-  // startView: {
-  //   //flex: 1,
-  //   justifyContent:'center',
-  //   alignItems: 'center',
-  //   backgroundColor: 'rgba(52, 52, 52, .5)'
-  // }
   container: {
     backgroundColor: "#fff",
     flex: 1,
     flexDirection: "column",
-    // justifyContent: "center", //main
-     alignItems: "center", //secondary
-    // alignContent:"center",
+    alignItems: "center", //secondary
   },
   backgroundImage: {
     flex: 10,
     flexDirection: "column",
     alignItems: "center",
-    width: WIDTH
+    width: WIDTH,
   },
-    text: {
-      top:50,
-      color: 'black',
-      fontSize: 15,
-      fontWeight: '800'}
+  text: {
+    top: 50,
+    color: "black",
+    fontSize: 15,
+    fontWeight: "800",
+  },
 });

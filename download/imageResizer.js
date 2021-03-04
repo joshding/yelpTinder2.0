@@ -12,7 +12,7 @@ const Jimp = require('jimp');
 async function resizeImages(images, width, height = Jimp.AUTO, quality){
 	await Promise.all(
 		images.map(async imgPath => {
-			const image = await Jimp.read(imgPath);
+			const image = await Jimp.read(imgPath).catch(console.log);
 			await image.resize(width, height);
 			await image.quality(quality);
 			await image.writeAsync(imgPath);
@@ -25,5 +25,5 @@ for(let i =3; i <= 50; i++) {
 }
 let width = 350;
 let quality = 100
-resizeImages(images, width, undefined, quality);
+//resizeImages(images, width, undefined, quality);
 module.exports = resizeImages;

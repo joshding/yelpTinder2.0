@@ -65,10 +65,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 1,
     width: 300,
-    //alignItems: 'center',
-    //minHeight: 10,
     borderRadius: 8,
-    //height: 500
   },
   image: {
     width: 50,

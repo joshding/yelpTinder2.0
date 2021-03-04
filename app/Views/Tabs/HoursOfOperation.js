@@ -42,7 +42,6 @@ const HoursOfOperation = ({ hours }) => {
     return `${hour}:${minutes}${ampm}`;
   }
   return (
-    //<Text>{hours[0].open[0].start}</Text>
     <View style={styles.container}>
       <View style={styles.row}>
         <View style={styles.firstCell}>
