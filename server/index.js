@@ -8,6 +8,7 @@ app.use(express.static(path.join(__dirname, '..', 'public')))
 app.get('/yelp', (req, res) => {
   controller.findAll((err, data) => {
     if(err) {
+      console.log('here is error server side: ', err);
       res.sendStatus(404)
     }
 

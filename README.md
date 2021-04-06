@@ -30,6 +30,7 @@ Installation:
 To Seed MongoDB Database:
 
 `npm run seed`
+`npm run asyncseed`
 
 To Start App:
 `npm start`
